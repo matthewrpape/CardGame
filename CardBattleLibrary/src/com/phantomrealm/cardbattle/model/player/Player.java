@@ -27,8 +27,9 @@ public interface Player {
 	/**
 	 * Get the position on the board where the player wishes to place his next card
 	 * @param board
+	 * @param opponentDeck
 	 * @return
 	 */
-	public Position getMove(Board board);
+	public Position getMove(Board board, Deck opponentDeck);
 	
 }
