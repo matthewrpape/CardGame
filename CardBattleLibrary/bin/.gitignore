@@ -1,0 +1,5 @@
+# eclipse generated class directories
+/com
+
+# Java class files
+*.class
