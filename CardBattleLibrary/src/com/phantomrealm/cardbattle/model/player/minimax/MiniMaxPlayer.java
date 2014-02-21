@@ -71,7 +71,7 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 			return Integer.MAX_VALUE - 1;
 		} else {
 			int worstRank = Integer.MAX_VALUE;
-			PlayerIdentity opponent = getIdentity() == PlayerIdentity.LEFT_PLAYER ? PlayerIdentity.RIGHT_PLAYER : PlayerIdentity.LEFT_PLAYER;
+			PlayerIdentity opponent = PlayerIdentity.not(getIdentity());
 			for (Position move : board.getPossibleMoves(opponent)) {
 				Board newBoard = board.clone();
 				Deck newDeck = opponentDeck.clone();
@@ -118,7 +118,7 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 		PlayerIdentity winner = board.getWinner();
 		if (winner == getIdentity()) { 
 			return Integer.MAX_VALUE - 1;
-		} else if (winner == (getIdentity() == PlayerIdentity.LEFT_PLAYER ? PlayerIdentity.RIGHT_PLAYER : PlayerIdentity.LEFT_PLAYER)) {
+		} else if (winner == PlayerIdentity.not(getIdentity())) {
 			return 0;
 		} else {
 			return -1;

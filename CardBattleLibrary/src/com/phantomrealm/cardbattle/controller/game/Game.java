@@ -75,7 +75,7 @@ public class Game {
 		mBoard.executeMove(currentPlayer.getDeck().pop(), currentPlayer.getIdentity(), currentMove);
 		
 		// ensure the correct player will receive the next turn
-		mCurrentPlayer = mCurrentPlayer == PlayerIdentity.LEFT_PLAYER ? PlayerIdentity.RIGHT_PLAYER : PlayerIdentity.LEFT_PLAYER;
+		mCurrentPlayer = PlayerIdentity.not(mCurrentPlayer);
 	}
 	
 	/**
