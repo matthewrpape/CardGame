@@ -6,68 +6,44 @@ import java.util.Stack;
 import com.phantomrealm.cardbattle.model.card.Card;
 
 /**
- * Model object used to represent a deck of 100 Cards
+ * Model object used to represent a deck of up to 100 Cards
  * 
  * @author matthewpape
  */
-public class Deck {
+public class Deck extends Stack<Card>{
 
-	Stack<Card> mCardStack;
+	/**
+	 * Serialization version identifier
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * Creates a deck from a list of up to 100 Cards. Any more than 100 will be ignored.
-	 * @param cards
+	 * If there are already 100 cards in the deck, no more can be added
+	 * @return the card that was pushed, or null if the deck was already full
 	 */
-	public Deck(Stack<Card> cards) {
-		if (cards == null || cards.size() == 0) {
-			// no cards yields an empty deck
-			mCardStack = new Stack<Card>();
-		} else if (cards.size() > 100) {
-			// too many cards, only keep the first 100
-			mCardStack = new Stack<Card>();
-			mCardStack.addAll(cards.subList(0, 100));
-		} else {
-			// an acceptable number of cards, use them all
-			mCardStack = cards;
+	@Override
+	public Card push(Card card) {
+		if (size() < 100) {
+			super.push(card);
+			return card;
 		}
+		
+		return null;
 	}
 	
 	/**
-	 * Creates a copy of the deck
+	 * Creates a clone of the deck with references to new data objects, rather
+	 *  than the originals
 	 */
-	@SuppressWarnings("unchecked")
+	@Override
 	public Deck clone() {
-		return new Deck((Stack<Card>) mCardStack.clone());
+		return (Deck) this.clone();
 	}
 	
 	/**
 	 * Randomizes the order of the contents of this deck
 	 */
 	public void Shuffle() {
-		Collections.shuffle(mCardStack);
-	}
-	
-	/**
-	 * Peeks at the next card in the deck without removing it
-	 * @return card that is still on the top of the deck
-	 */
-	public Card peek () {
-		return mCardStack.peek();
-	}
-	
-	/**
-	 * Pops the next card off the deck
-	 * @return card that up until now had been on the top of the deck
-	 */
-	public Card pop() {
-		return mCardStack.pop();
-	}
-	
-	/**
-	 * Indicates whether or not the deck is null or of size zero
-	 * @return true if the deck is null or of size zero
-	 */
-	public boolean isEmpty() {
-		return mCardStack == null || mCardStack.isEmpty();
+		Collections.shuffle(this);
 	}
 }

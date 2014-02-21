@@ -1,8 +1,5 @@
 package com.phantomrealm.cardbattle.model.deck;
 
-import java.util.Stack;
-
-import com.phantomrealm.cardbattle.model.card.Card;
 import com.phantomrealm.cardbattle.model.card.CardFactory;
 
 /**
@@ -98,11 +95,11 @@ public class DeckFactory {
 		deckSize = Math.min(100, deckSize);
 		deckSize = Math.max(deckSize, 0);
 		
-		Stack<Card> cards = new Stack<Card>();
+		Deck deck = new Deck();
 		for (int i = 0; i < deckSize; ++i) {
-			cards.push(CardFactory.generateTestCard(attackMax, defenseMax, attackMin, defenseMin));
+			deck.push(CardFactory.generateTestCard(attackMax, defenseMax, attackMin, defenseMin));
 		}
-		return new Deck(cards);
+		return deck;
 	}
 
 }
