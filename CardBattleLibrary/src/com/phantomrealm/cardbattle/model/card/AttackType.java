@@ -6,6 +6,13 @@ package com.phantomrealm.cardbattle.model.card;
  * @author matthewpape
  */
 public enum AttackType {
+	/**
+	 * Physical attack that target the defense stat
+	 */
 	PHYSICAL,
+	
+	/**
+	 * Magical attack that targets the resistance stat
+	 */
 	MAGICAL
 }

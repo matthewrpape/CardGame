@@ -15,7 +15,7 @@ public class CardFactory {
 	private static final int DEFENSE_MAX = 4;
 	
 	/**
-	 * Create a random test card named "Test Card" for testing purposes. The card will be randomly assigned
+	 * Creates a random test card named "Test Card" for testing purposes. The card will be randomly assigned
 	 *  a magical or physical attack type. It will have no bonus effect. Attack will vary between 1 and 5
 	 *  inclusively. Defense and Resistance will vary between 0 and 4 inclusively.
 	 * @return 
@@ -25,7 +25,7 @@ public class CardFactory {
 	}
 	
 	/**
-	 * Create a random test card named "Test Card" for testing purposes. The card will be randomly assigned
+	 * Creates a random test card named "Test Card" for testing purposes. The card will be randomly assigned
 	 *  a magical or physical attack type. It will have no bonus effect. Attack will vary between 1 and 
 	 *  attackMax inclusively. Defense and Resistance will vary between 0 and defenseMax inclusively.
 	 * @param attackMax max value for Attack (must be >= 1)
@@ -37,7 +37,7 @@ public class CardFactory {
 	}
 	
 	/**
-	 * Create a random test card named "Test Card" for testing purposes. The card will be randomly assigned
+	 * Creates a random test card named "Test Card" for testing purposes. The card will be randomly assigned
 	 *  a magical or physical attack type. It will have no bonus effect. Attack will vary between attackMin
 	 *  and attackMax inclusively. Defense and Resistance will vary between defenseMin and defenseMax inclusively.
 	 * @param attackMax max value for Attack (must be >= attackMin, <= 5)
@@ -57,7 +57,6 @@ public class CardFactory {
 		defenseMax = Math.max(defenseMin, defenseMax);
 		defenseMax = Math.max(defenseMax, DEFENSE_MAX);
 		
-		
 		Random randomGenerator = new Random();
 		int attack = getRandomIntBetween(attackMax, attackMin);
 		int defense = getRandomIntBetween(defenseMax, defenseMin);
@@ -67,7 +66,7 @@ public class CardFactory {
 	}
 	
 	/**
-	 * Generate a psuedo-random int between two values inclusively
+	 * Generates a psuedo-random int between two values inclusively
 	 * @param max highest possible value for the int
 	 * @param min lowest possible value for the int
 	 * @return
