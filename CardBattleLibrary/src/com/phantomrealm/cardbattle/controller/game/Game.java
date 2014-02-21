@@ -48,6 +48,12 @@ public class Game {
 	private Board mBoard;
 	private PlayerIdentity mCurrentPlayer;
 	
+	/**
+	 * Creates a game instance with the given players and board
+	 * @param leftPlayer must have identity set as LEFT_PLAYER
+	 * @param rightPlayer must have identity set as RIGHT_PLAYER
+	 * @param board
+	 */
 	private Game(Player leftPlayer, Player rightPlayer, Board board){
 		mLeftPlayer = leftPlayer;
 		mRightPlayer = rightPlayer;
@@ -55,6 +61,10 @@ public class Game {
 		mCurrentPlayer = PlayerIdentity.LEFT_PLAYER;
 	}
 	
+	/**
+	 * Sets the listener to be called on specific game events
+	 * @param listener
+	 */
 	public void setGameControllerListener(GameControllerListener listener) {
 		mBoard.setGameControllerListener(listener != null ? listener : new EmptyGameControllerListener());
 	}
@@ -88,10 +98,10 @@ public class Game {
 	}
 	
 	/**
-	 * The third and final step of each round of play
-	 *  Return the player who has won the game, either by controlling a majority
-	 *  of rows or by being the last player left with cards in their deck, or
-	 *  null if no player has yet won.
+	 *  The third and final step of each round of play
+	 *   Return the player who has won the game, either by controlling a majority
+	 *   of rows or because their opponent is unable to take their turn because
+	 *   they are out of cards. Returns null if no one has won yet.
 	 * @return
 	 */
 	public PlayerIdentity getWinner() {
@@ -99,11 +109,10 @@ public class Game {
 		PlayerIdentity winner = mBoard.getWinner();
 		
 		if (winner == null) {
-			// see if anyone lost be running out of cards
-			if (mLeftPlayer.getDeck().isEmpty()) {
-				winner = PlayerIdentity.RIGHT_PLAYER;
-			} else if (mRightPlayer.getDeck().isEmpty()) {
-				winner = PlayerIdentity.LEFT_PLAYER;
+			// see if the next player is out of cards, and therefore forfeits
+			Player nextPlayer = (mCurrentPlayer == PlayerIdentity.LEFT_PLAYER ? mLeftPlayer : mRightPlayer);
+			if (nextPlayer.getDeck().isEmpty()) {
+				winner = PlayerIdentity.not(mCurrentPlayer);
 			}
 		}
 		
