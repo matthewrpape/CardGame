@@ -37,7 +37,7 @@ public class Deck extends Stack<Card>{
 	 */
 	@Override
 	public Deck clone() {
-		return (Deck) this.clone();
+		return (Deck) super.clone();
 	}
 	
 	/**
