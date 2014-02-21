@@ -10,9 +10,9 @@ import java.util.Random;
 public class CardFactory {
 	
 	private static final int ATTACK_MIN = 1;
-	private static final int ATTACK_MAX = 4;
+	private static final int ATTACK_MAX = 5;
 	private static final int DEFENSE_MIN = 0;
-	private static final int DEFENSE_MAX = 5;
+	private static final int DEFENSE_MAX = 4;
 	
 	/**
 	 * Create a random test card named "Test Card" for testing purposes. The card will be randomly assigned

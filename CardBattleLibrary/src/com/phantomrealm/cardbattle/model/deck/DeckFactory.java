@@ -14,9 +14,9 @@ public class DeckFactory {
 	
 	private static final int DEFAULT_DECK_SIZE = 100;
 	private static final int ATTACK_MIN = 1;
-	private static final int ATTACK_MAX = 4;
+	private static final int ATTACK_MAX = 5;
 	private static final int DEFENSE_MIN = 0;
-	private static final int DEFENSE_MAX = 5;
+	private static final int DEFENSE_MAX = 4;
 	private static final int POWERFUL_DECK_ATTACK_MIN = 2;
 	private static final int POWERFUL_DECK_DEFENSE_MIN = 1;
 	private static final int WEAK_DECK_ATTACK_MAX = 3;

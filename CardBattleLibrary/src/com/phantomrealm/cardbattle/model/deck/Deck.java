@@ -32,6 +32,11 @@ public class Deck {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Deck clone() {
+		return new Deck((Stack<Card>) mCardStack.clone());
+	}
+	
 	/**
 	 * Randomize the order of the contents of this deck
 	 */

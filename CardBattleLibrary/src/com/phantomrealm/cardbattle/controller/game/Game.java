@@ -66,9 +66,10 @@ public class Game {
 	public void takePlayerTurn() {
 		// determine which player is taking a turn
 		Player currentPlayer = mCurrentPlayer == PlayerIdentity.LEFT_PLAYER ? mLeftPlayer : mRightPlayer;
+		Player opponent = mCurrentPlayer == PlayerIdentity.LEFT_PLAYER ? mRightPlayer : mLeftPlayer;
 
 		// get the desired move from the player
-		Position currentMove = currentPlayer.getMove(mBoard);
+		Position currentMove = currentPlayer.getMove(mBoard, opponent.getDeck());
 
 		// execute the desired move on behalf of the player
 		mBoard.executeMove(currentPlayer.getDeck().pop(), currentPlayer.getIdentity(), currentMove);

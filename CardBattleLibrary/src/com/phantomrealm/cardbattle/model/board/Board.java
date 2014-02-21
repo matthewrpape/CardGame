@@ -1,5 +1,8 @@
 package com.phantomrealm.cardbattle.model.board;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.phantomrealm.cardbattle.controller.game.EmptyGameControllerListener;
 import com.phantomrealm.cardbattle.controller.game.GameControllerListener;
 import com.phantomrealm.cardbattle.model.card.AttackType;
@@ -48,16 +51,22 @@ public class Board {
 		}
 	}
 	
-	public Board(Board board) {
-		mListener = new EmptyGameControllerListener();
-		int boardWidth = board.getWidth();
-		int boardHeight = board.getHeight();
-		mBoardSlots = new BoardSlot[boardHeight][boardWidth];
+	public Board clone() {
+		int boardWidth = getWidth();
+		int boardHeight = getHeight();
+		Board clonedBoard = new Board(boardWidth, boardHeight);
 		for (int row = 0; row < boardHeight; ++row) {
 			for (int col = 0; col < boardWidth; ++col) {
-				mBoardSlots[row][col] = new BoardSlot(board.getBoardSlot(row, col));
+				BoardSlot boardSlot = getBoardSlot(row, col);
+				BoardSlot clonedSlot = clonedBoard.getBoardSlot(row, col);
+				clonedSlot.setSlotOwner(boardSlot.getOwner());
+				Card card = boardSlot.getCard();
+				if (card != null) {
+				 clonedSlot.setCard(card.clone());
+				}
 			}
 		}
+		return clonedBoard;
 	}
 	
 	public void setGameControllerListener(GameControllerListener listener) {
@@ -138,6 +147,9 @@ public class Board {
 	 * @param move
 	 */
 	public void executeMove(Card card, PlayerIdentity cardOwner, Position move) {
+		if (move == null) { 
+			System.out.println("NULL MOVE");
+		}
 		mListener.onCardMoved(cardOwner, move);
 		BoardSlot position = getBoardSlot(move.getRow(), move.getColumn());
 		position.setCard(card);
@@ -290,5 +302,28 @@ public class Board {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * Returns a list of all the possible positions on the board where a given player
+	 *  could currently place a card
+	 *  
+	 * @param player
+	 * @return
+	 */
+	public List<Position> getPossibleMoves(PlayerIdentity player) {
+		List<Position> moves = new ArrayList<Position>();
+		int begin = player == PlayerIdentity.LEFT_PLAYER ? 0 : getWidth() - 1;
+		int end = player == PlayerIdentity.LEFT_PLAYER ? getWidth() - 1 : 0;
+		int increment = player == PlayerIdentity.LEFT_PLAYER ? 1 : -1;
+		for (int row = 0; row < getHeight(); ++row) {
+			for (int col = begin; player == PlayerIdentity.LEFT_PLAYER ? col <= end : col >= end; col += increment) {
+				if (getBoardSlot(row, col).getOwner() == null) {
+					moves.add(new Position(row, col));
+					break;
+				}
+			}
+		}
+		return moves;
 	}
 }
