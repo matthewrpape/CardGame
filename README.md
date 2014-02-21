@@ -18,7 +18,7 @@ Game.Builder builder = new Game.Builder(playerOne, playerTwo, board);
 Game game = builder.build();
 ```
 
-play a game...
+playing a game...
 ```
 while (game.getWinner() == null) {
 	// allow the next player to take their turn
