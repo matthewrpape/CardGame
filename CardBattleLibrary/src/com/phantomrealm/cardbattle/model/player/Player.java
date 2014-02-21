@@ -13,19 +13,19 @@ import com.phantomrealm.cardbattle.model.deck.Deck;
 public interface Player {
 
 	/**
-	 * Get the identity of the given player (left or right)
+	 * Gets the identity of the given player (left or right)
 	 * @return
 	 */
 	public PlayerIdentity getIdentity();
 	
 	/**
-	 * Get the deck of the given player
+	 * Gets the deck of the given player
 	 * @return
 	 */
 	public Deck getDeck();
 	
 	/**
-	 * Get the position on the board where the player wishes to place his next card
+	 * Gets the position on the board where the player wishes to place its next card
 	 * @param board
 	 * @param opponentDeck
 	 * @return

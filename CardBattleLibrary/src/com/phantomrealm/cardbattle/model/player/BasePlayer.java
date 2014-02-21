@@ -14,6 +14,11 @@ public abstract class BasePlayer implements Player {
 	protected PlayerIdentity mIdentity;
 	protected Deck mDeck;
 	
+	/**
+	 * Creates a base player with a given identity and deck
+	 * @param identity
+	 * @param deck
+	 */
 	public BasePlayer(PlayerIdentity identity, Deck deck) {
 		mIdentity = identity;
 		mDeck = deck;
