@@ -15,6 +15,11 @@ import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
  */
 public class RandomPlayer extends AlgorithmicPlayer {
 
+	/**
+	 * Creates a RandomPlayer with a given identity and deck
+	 * @param identity
+	 * @param deck
+	 */
 	public RandomPlayer(PlayerIdentity identity, Deck deck) {
 		super(identity, deck);
 	}

@@ -14,6 +14,11 @@ import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
  */
 public class OrderedPlayer extends AlgorithmicPlayer {
 
+	/**
+	 * Creates an OrderedPlayer with a given identity and deck
+	 * @param identity
+	 * @param deck
+	 */
 	public OrderedPlayer(PlayerIdentity identity, Deck deck) {
 		super(identity, deck);
 	}
