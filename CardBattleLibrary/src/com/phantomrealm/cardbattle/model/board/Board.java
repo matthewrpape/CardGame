@@ -25,7 +25,7 @@ public class Board {
 	private BoardSlot[][] mBoardSlots;
 	
 	/**
-	 * Create a board of default size (5x5)
+	 * Creates a board of default size (5x5)
 	 */
 	public Board() {
 		this(DEFAULT_BOARD_WIDTH, DEFAULT_BOARD_HEIGHT);
@@ -80,7 +80,6 @@ public class Board {
 		mListener = listener != null ? listener : new EmptyGameControllerListener();
 	}
 
-	
 	/**
 	 * Returns the width of the board
 	 * @return
@@ -231,7 +230,7 @@ public class Board {
 	}
 	
 	/**
-	 * Emptys a given slot by removing the card and assigning the owner to NONE
+	 * Empties a given slot by removing the card and assigning the owner to NONE
 	 * @param boardSlot
 	 */
 	private void emptySlot(BoardSlot boardSlot) {
@@ -314,7 +313,6 @@ public class Board {
 	/**
 	 * Returns a list of all the possible positions on the board where a given player
 	 *  could currently place a card
-	 *  
 	 * @param player
 	 * @return
 	 */
