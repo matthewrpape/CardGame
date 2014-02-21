@@ -12,31 +12,11 @@ import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
  * @author matthewpape
  */
 public abstract class AlgorithmicPlayer extends BasePlayer {
-
-	protected PlayerIdentity mIdentity;
-	protected Deck mDeck;
 	
 	public AlgorithmicPlayer(PlayerIdentity identity, Deck deck) {
-		mIdentity = identity;
-		mDeck = deck;
+		super(identity, deck);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.phantomrealm.cardbattle.model.player.Player#getDeck()
-	 */
-	@Override
-	public Deck getDeck() {
-		return mDeck;
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.phantomrealm.cardbattle.model.player.Player#getIdentity()
-	 */
-	@Override
-	public PlayerIdentity getIdentity() {
-		return mIdentity;
-	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.phantomrealm.cardbattle.model.player.Player#getMove(com.phantomrealm.cardbattle.model.board.Board)
 	 */

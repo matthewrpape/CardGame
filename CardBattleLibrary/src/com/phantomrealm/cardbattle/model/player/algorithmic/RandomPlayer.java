@@ -24,7 +24,7 @@ public class RandomPlayer extends AlgorithmicPlayer {
 	 */
 	@Override
 	protected Position generateMove(Board board) {
-		List<Position> availableMoves = getPossibleMoves(board);
+		List<Position> availableMoves = board.getPossibleMoves(getIdentity());
 		Random randomGenerator = new Random();
 		return availableMoves.get(randomGenerator.nextInt(availableMoves.size()));
 	}

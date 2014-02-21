@@ -23,7 +23,7 @@ public class OrderedPlayer extends AlgorithmicPlayer {
 	 */
 	@Override
 	protected Position generateMove(Board board) {
-		List<Position> availableMoves = getPossibleMoves(board);
+		List<Position> availableMoves = board.getPossibleMoves(getIdentity());
 		return availableMoves.get(0);
 	}
 

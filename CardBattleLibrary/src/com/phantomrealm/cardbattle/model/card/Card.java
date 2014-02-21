@@ -32,6 +32,10 @@ public class Card {
 		mResistance = card.getResistance();
 		mDefense = card.getDefense();
 	}
+	
+	public Card clone() {
+		return new Card(mName, mBonusEffect, mAttackType, mAttack, mResistance, mDefense);
+	}
 
 	/**
 	 * Get the display name to be used for the card
@@ -136,6 +140,10 @@ public class Card {
 	 */
 	public int getDefenseForAttackType(AttackType attackType) {
 		return attackType == AttackType.MAGICAL ? getResistance() : getDefense();
+	}
+	
+	public String toString() {
+		return getName() + " " + getAttackType() + ": " + getAttack() + " r: " + getResistance() + " d: " + getDefense();
 	}
 	
 }

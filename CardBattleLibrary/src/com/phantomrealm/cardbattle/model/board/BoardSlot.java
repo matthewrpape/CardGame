@@ -19,11 +19,6 @@ public class BoardSlot {
 	public BoardSlot() {
 	}
 	
-	public BoardSlot(BoardSlot boardSlot) {
-		mOwner = boardSlot.getOwner();
-		mCard = new Card(boardSlot.getCard());
-	}
-	
 	/**
 	 * Get the owner of this slot on the board
 	 * @return
@@ -56,4 +51,7 @@ public class BoardSlot {
 		mCard = card;
 	}
 	
+	public String toString() {
+		return getOwner() + ", " + (getCard() == null ? null : getCard().toString());
+	}
 }
