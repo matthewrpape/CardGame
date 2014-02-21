@@ -13,6 +13,11 @@ import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
  */
 public abstract class AlgorithmicPlayer extends BasePlayer {
 	
+	/**
+	 * Creates an AlgorithmicPlayer with a given identity and deck
+	 * @param identity
+	 * @param deck
+	 */
 	public AlgorithmicPlayer(PlayerIdentity identity, Deck deck) {
 		super(identity, deck);
 	}

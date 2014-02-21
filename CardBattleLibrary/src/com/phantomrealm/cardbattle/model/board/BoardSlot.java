@@ -14,13 +14,13 @@ public class BoardSlot {
 	private Card mCard;
 	
 	/**
-	 * Create a new slot for the game board which is controlled by neither player
+	 * Creates a new slot for the game board which is controlled by neither player
 	 */
 	public BoardSlot() {
 	}
 	
 	/**
-	 * Get the owner of this slot on the board
+	 * Gets the owner of this slot on the board
 	 * @return
 	 */
 	public PlayerIdentity getOwner() {
@@ -28,7 +28,7 @@ public class BoardSlot {
 	}
 	
 	/**
-	 * Set the owner of this slot on the board
+	 * Sets the owner of this slot on the board
 	 * @param owner
 	 */
 	public void setSlotOwner(PlayerIdentity owner) {
@@ -36,7 +36,7 @@ public class BoardSlot {
 	}
 	
 	/**
-	 * Get the card on this position in the board
+	 * Gets the card on this position in the board
 	 * @return
 	 */
 	public Card getCard() {
@@ -44,13 +44,16 @@ public class BoardSlot {
 	}
 	
 	/**
-	 * Set the card on this position in the board
+	 * Sets the card on this position in the board
 	 * @param card
 	 */
 	public void setCard(Card card) {
 		mCard = card;
 	}
 	
+	/**
+	 * Gets the string representation of a board slot
+	 */
 	public String toString() {
 		return getOwner() + ", " + (getCard() == null ? null : getCard().toString());
 	}

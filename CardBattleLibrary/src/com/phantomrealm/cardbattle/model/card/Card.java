@@ -15,6 +15,15 @@ public class Card {
 	private int mResistance;
 	private int mDefense;
 	
+	/**
+	 * Creates a card with the given qualities
+	 * @param name
+	 * @param bonusEffect
+	 * @param attackType
+	 * @param attack
+	 * @param resistance
+	 * @param defense
+	 */
 	public Card(String name, BonusEffect bonusEffect, AttackType attackType, int attack, int resistance, int defense) {
 		mName = name;
 		mBonusEffect = bonusEffect;
@@ -24,21 +33,15 @@ public class Card {
 		mDefense = defense;
 	}
 	
-	public Card(Card card) {
-		mName = card.getName();
-		mBonusEffect = card.getBonusEffect();
-		mAttackType = card.getAttackType();
-		mAttack = card.getAttack();
-		mResistance = card.getResistance();
-		mDefense = card.getDefense();
-	}
-	
+	/**
+	 * Creates a copy of a given card
+	 */
 	public Card clone() {
 		return new Card(mName, mBonusEffect, mAttackType, mAttack, mResistance, mDefense);
 	}
 
 	/**
-	 * Get the display name to be used for the card
+	 * Gets the display name to be used for the card
 	 * @return
 	 */
 	public String getName() {
@@ -46,7 +49,7 @@ public class Card {
 	}
 
 	/**
-	 * Set the display name to be used for the card
+	 * Sets the display name to be used for the card
 	 * @param name
 	 */
 	public void setName(String name) {
@@ -54,7 +57,7 @@ public class Card {
 	}
 
 	/**
-	 * Get the bonus effect to be used for the card
+	 * Gets the bonus effect to be used for the card
 	 * @return
 	 */
 	public BonusEffect getBonusEffect() {
@@ -62,7 +65,7 @@ public class Card {
 	}
 
 	/**
-	 * Set the bonus effect to be used for the card
+	 * Sets the bonus effect to be used for the card
 	 * @param bonusEffect
 	 */
 	public void setBonusEffect(BonusEffect bonusEffect) {
@@ -70,7 +73,7 @@ public class Card {
 	}
 
 	/**
-	 * Get the type of attack that the card uses in battle
+	 * Gets the type of attack that the card uses in battle
 	 * @return
 	 */
 	public AttackType getAttackType() {
@@ -78,7 +81,7 @@ public class Card {
 	}
 
 	/**
-	 * Set the type of attack that the card uses in battle
+	 * Sets the type of attack that the card uses in battle
 	 * @param attackType
 	 */
 	public void setAttackType(AttackType attackType) {
@@ -86,7 +89,7 @@ public class Card {
 	}
 
 	/**
-	 * Get the attack strength of the card
+	 * Gets the attack strength of the card
 	 * @return
 	 */
 	public int getAttack() {
@@ -94,7 +97,7 @@ public class Card {
 	}
 
 	/**
-	 * Set the attack strength of the card
+	 * Sets the attack strength of the card
 	 * @param attack
 	 */
 	public void setAttack(int attack) {
@@ -102,7 +105,7 @@ public class Card {
 	}
 
 	/**
-	 * Get the resistance of the card to magical attacks
+	 * Gets the resistance of the card to magical attacks
 	 * @return
 	 */
 	public int getResistance() {
@@ -110,7 +113,7 @@ public class Card {
 	}
 
 	/**
-	 * Set the resistance of the card to magical attacks
+	 * Sets the resistance of the card to magical attacks
 	 * @param resistance
 	 */
 	public void setResistance(int resistance) {
@@ -118,7 +121,7 @@ public class Card {
 	}
 
 	/**
-	 * Get the defense of the card to physical attacks
+	 * Gets the defense of the card to physical attacks
 	 * @return
 	 */
 	public int getDefense() {
@@ -126,7 +129,7 @@ public class Card {
 	}
 
 	/**
-	 * Set the defense of the card to physical attacks
+	 * Sets the defense of the card to physical attacks
 	 * @param defense
 	 */
 	public void setDefense(int defense) {
@@ -134,7 +137,7 @@ public class Card {
 	}
 	
 	/**
-	 * Get the resistance or defense of the card based on the type of attack
+	 * Gets the resistance or defense of the card based on the type of attack
 	 * @param attackType Magical (yields resistance) or Physical (yields defense)
 	 * @return
 	 */
@@ -142,6 +145,9 @@ public class Card {
 		return attackType == AttackType.MAGICAL ? getResistance() : getDefense();
 	}
 	
+	/**
+	 * Gets the string representation of a card class
+	 */
 	public String toString() {
 		return getName() + " " + getAttackType() + ": " + getAttack() + " r: " + getResistance() + " d: " + getDefense();
 	}

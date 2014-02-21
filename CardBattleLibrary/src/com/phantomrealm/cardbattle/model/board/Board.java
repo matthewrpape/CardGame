@@ -25,14 +25,14 @@ public class Board {
 	private BoardSlot[][] mBoardSlots;
 	
 	/**
-	 * Create a board of default size (5x5)
+	 * Creates a board of default size (5x5)
 	 */
 	public Board() {
 		this(DEFAULT_BOARD_WIDTH, DEFAULT_BOARD_HEIGHT);
 	}
 	
 	/**
-	 * Create a board of given size. Width may be no less than 2. Height may be no less
+	 * Creates a board of given size. Width may be no less than 2. Height may be no less
 	 *  than 1. It should be noted than boards with excessively large area will result in
 	 *  opponents decking out rather than winning through standard means. This is highly
 	 *  unfair to the player who begins, and so such boards should be avoided.
@@ -51,6 +51,9 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Creates a copy of an existing board
+	 */
 	public Board clone() {
 		int boardWidth = getWidth();
 		int boardHeight = getHeight();
@@ -69,13 +72,16 @@ public class Board {
 		return clonedBoard;
 	}
 	
+	/**
+	 * Sets the listener to be called on specific game events
+	 * @param listener
+	 */
 	public void setGameControllerListener(GameControllerListener listener) {
 		mListener = listener != null ? listener : new EmptyGameControllerListener();
 	}
 
-	
 	/**
-	 * Return the width of the board
+	 * Returns the width of the board
 	 * @return
 	 */
 	public int getWidth() {
@@ -83,7 +89,7 @@ public class Board {
 	}
 	
 	/**
-	 * Return the height of the board
+	 * Returns the height of the board
 	 * @return
 	 */
 	public int getHeight() {
@@ -91,7 +97,7 @@ public class Board {
 	}
 	
 	/**
-	 * Retrieve the given row of BoardSlots
+	 * Retrieves the given row of BoardSlots
 	 * @param row
 	 * @return
 	 */
@@ -100,7 +106,7 @@ public class Board {
 	}
 	
 	/**
-	 * Retrieve the BoardSlot at the given position
+	 * Retrieves the BoardSlot at the given position
 	 * @param row
 	 * @param column
 	 * @return
@@ -110,7 +116,7 @@ public class Board {
 	}
 	
 	/**
-	 * Get the (x, y) coordinates of a particular BoardSlot
+	 * Gets the (x, y) coordinates of a particular BoardSlot
 	 * @param boardSlot
 	 * @return null in the event that the given boardslot was not found
 	 */
@@ -126,7 +132,7 @@ public class Board {
 	}
 	
 	/**
-	 * Check if every single slot on the board is owned
+	 * Checks if every single slot on the board is owned
 	 * @return
 	 */
 	public boolean isFull() {
@@ -141,7 +147,7 @@ public class Board {
 	}
 	
 	/**
-	 * Update the board by placing a given card from a given player in the given position,
+	 * Updates the board by placing a given card from a given player in the given position,
 	 *  signaling the callback for a card being moved.
 	 * @param player
 	 * @param move
@@ -157,7 +163,7 @@ public class Board {
 	}
 	
 	/**
-	 * Settle conflicts anywhere on the board, and update the board accordingly
+	 * Settles conflicts anywhere on the board, and updates the board accordingly
 	 */
 	public void resolveBoardConflicts() {
 		for (int row = 0; row < getHeight(); ++row) {
@@ -166,7 +172,7 @@ public class Board {
 	}
 	
 	/**
-	 * Settle conflicts in a given row, and update the row accordingly
+	 * Settles conflicts in a given row, and updates the row accordingly
 	 * @param boardRow
 	 */
 	private void resolveRow(BoardSlot[] boardRow) {
@@ -182,7 +188,7 @@ public class Board {
 	}
 	
 	/**
-	 * Resolve a conflict between two given positions on the board
+	 * Resolves a conflict between two given positions on the board
 	 * @param leftSlot controlled by the left player
 	 * @param rightSlot controlled by the right player
 	 */
@@ -203,7 +209,7 @@ public class Board {
 	}
 	
 	/**
-	 * Kill every single card on the board
+	 * Kills every single card on the board
 	 */
 	private void killBoard() {
 		for (int row = 0; row < getHeight(); ++row) {
@@ -214,7 +220,7 @@ public class Board {
 	}
 	
 	/**
-	 * Remove a card and owner from a given slot, signaling the callback for a card being defeated
+	 * Removes a card and owner from a given slot, signaling the callback for a card being defeated
 	 * @param boardSlot
 	 * @param attackType
 	 */
@@ -224,7 +230,7 @@ public class Board {
 	}
 	
 	/**
-	 * Empty a given slot by removing the card and assigning the owner to NONE
+	 * Empties a given slot by removing the card and assigning the owner to NONE
 	 * @param boardSlot
 	 */
 	private void emptySlot(BoardSlot boardSlot) {
@@ -233,7 +239,7 @@ public class Board {
 	}
 	
 	/**
-	 * If the board is full, clear out all stalemated cards
+	 * Clears out all stalemated cards if the board is full
 	 */
 	public void resolveBoardStalemate() {
 		if (isFull()) {
@@ -244,7 +250,7 @@ public class Board {
 	}
 	
 	/**
-	 * Update a given row of the game board by removing any stalemated cards
+	 * Updates a given row of the game board by removing any stalemated cards
 	 * @param boardRow
 	 */
 	private void unstalemateRow(BoardSlot[] boardRow) {
@@ -259,7 +265,7 @@ public class Board {
 	}
 	
 	/**
-	 * Remove a stalemate between two given slots from the board
+	 * Removes a stalemate between two given slots from the board
 	 * @param leftSlot controlled by the left player
 	 * @param rightSlot controlled by the right player
 	 */
@@ -273,7 +279,7 @@ public class Board {
 	
 	/**
 	 * The fourth and final step of each round of play
-	 *  Return the player who has won the game, either by controlling a majority
+	 *  Returns the player who has won the game, either by controlling a majority
 	 *  of rows or by being the last player left with cards in their deck, or
 	 *  null if no player has yet won.
 	 * @return
@@ -307,7 +313,6 @@ public class Board {
 	/**
 	 * Returns a list of all the possible positions on the board where a given player
 	 *  could currently place a card
-	 *  
 	 * @param player
 	 * @return
 	 */

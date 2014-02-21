@@ -1,5 +1,10 @@
 package com.phantomrealm.cardbattle.model.player;
 
+/**
+ * Indicates the identity of a given player (playing on the left side of the board or the right)
+ * 
+ * @author matthewpape
+ */
 public enum PlayerIdentity {
 	/**
 	 * The player who begins on the left side of the board and always plays first
