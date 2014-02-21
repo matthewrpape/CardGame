@@ -37,6 +37,10 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 		mDepth = Math.max(depth, DEFAULT_DEPTH);
 	}
 	
+	/**
+	 * Gets the depth to be used for the minimax algorithm
+	 * @return
+	 */
 	private int getDepth() {
 		return mDepth;
 	}
@@ -64,6 +68,15 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 		return bestMove;
 	}
 
+	/**
+	 * Returns the rank of the worst possible move that can be made, accounting for
+	 *  alternatively calling maximize and minimize until depth has been reached
+	 * @param board
+	 * @param playerDeck
+	 * @param opponentDeck
+	 * @param depth
+	 * @return
+	 */
 	private int minimize(Board board, Deck playerDeck, Deck opponentDeck, int depth) {
 		if (depth == 0) {
 			return evaluate(board);
@@ -88,6 +101,15 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 		}
 	}
 	
+	/**
+	 * Returns the rank of the best possible move that can be made, accounting for
+	 *  alternatively calling minimize and maximize until depth has been reached
+	 * @param board
+	 * @param playerDeck
+	 * @param opponentDeck
+	 * @param depth
+	 * @return
+	 */
 	private int maximize(Board board, Deck playerDeck, Deck opponentDeck, int depth) {
 		if (depth == 0) {
 			return evaluate(board);
@@ -111,6 +133,15 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 		}
 	}
 	
+	/**
+	 * Returns a rank for the board after updating it, by placing the given card in the given position,
+	 *  assigning the given player as the owner, and resolving conflicts and stalemates on the board.
+	 * @param board
+	 * @param card
+	 * @param player
+	 * @param move
+	 * @return -1 represents an inconclusive rank and should be ignored.
+	 */
 	private int updateBoard(Board board, Card card, PlayerIdentity player, Position move) {
 		board.executeMove(card, player, move);
 		board.resolveBoardConflicts();
@@ -125,6 +156,11 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 		}
 	}
 	
+	/**
+	 * Gets a numerical ranking of how desirable a given board is
+	 * @param board
+	 * @return
+	 */
 	protected abstract int evaluate(Board board);
 
 }
