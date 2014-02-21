@@ -23,7 +23,7 @@ public class DeckFactory {
 	private static final int WEAK_DECK_DEFENSE_MAX = 4;
 	
 	/**
-	 * Create a deck of 100 cards with above average stats
+	 * Creates a deck of 100 cards with above average stats
 	 * @return
 	 */
 	public static Deck generatePowerfulTestDeck() {
@@ -31,7 +31,7 @@ public class DeckFactory {
 	}
 	
 	/**
-	 * Create a deck with above average stats of a given size
+	 * Creates a deck with above average stats of a given size
 	 * @param deckSize must be between 0 and 100 inclusive
 	 * @return
 	 */
@@ -40,7 +40,7 @@ public class DeckFactory {
 	}
 	
 	/**
-	 * Create a deck of 100 cards with bellow average stats
+	 * Creates a deck of 100 cards with bellow average stats
 	 * @return
 	 */
 	public static Deck generateWeakTestDeck() {
@@ -48,7 +48,7 @@ public class DeckFactory {
 	}
 	
 	/**
-	 * Create a deck with bellow average stats of a given size
+	 * Creates a deck with bellow average stats of a given size
 	 * @param deckSize must be between 0 and 100 inclusive
 	 * @return
 	 */
@@ -57,7 +57,7 @@ public class DeckFactory {
 	}
 	
 	/**
-	 * Generate a deck of 100 cards with average stats
+	 * Generates a deck of 100 cards with average stats
 	 * @return
 	 */
 	public static Deck generateTestDeck() {
@@ -65,7 +65,7 @@ public class DeckFactory {
 	}
 	
 	/**
-	 * Generate a deck of a given size with average stats
+	 * Generates a deck of a given size with average stats
 	 * @param deckSize
 	 * @return
 	 */
@@ -74,7 +74,7 @@ public class DeckFactory {
 	}
 	
 	/**
-	 * Generate a deck of 100 cards, filled with cards using specified stats.
+	 * Generates a deck of 100 cards, filled with cards using specified stats.
 	 * @param attackMax subject to same rules as CardFactory cards
 	 * @param defenseMax subject to same rules as CardFactory cards
 	 * @param attackMin subject to same rules as CardFactory cards
@@ -86,7 +86,7 @@ public class DeckFactory {
 	}
 	
 	/**
-	 * Generate a deck of specified size, filled with cards using specified stats.
+	 * Generates a deck of specified size, filled with cards using specified stats.
 	 * @param deckSize must be between 0 and 100 inclusive
 	 * @param attackMax subject to same rules as CardFactory cards
 	 * @param defenseMax subject to same rules as CardFactory cards

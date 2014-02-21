@@ -15,7 +15,7 @@ public class Deck {
 	Stack<Card> mCardStack;
 	
 	/**
-	 * Create a deck form a list of up to 100 Cards. Any more than 100 will be ignored.
+	 * Creates a deck from a list of up to 100 Cards. Any more than 100 will be ignored.
 	 * @param cards
 	 */
 	public Deck(Stack<Card> cards) {
@@ -32,20 +32,23 @@ public class Deck {
 		}
 	}
 	
+	/**
+	 * Creates a copy of the deck
+	 */
 	@SuppressWarnings("unchecked")
 	public Deck clone() {
 		return new Deck((Stack<Card>) mCardStack.clone());
 	}
 	
 	/**
-	 * Randomize the order of the contents of this deck
+	 * Randomizes the order of the contents of this deck
 	 */
 	public void Shuffle() {
 		Collections.shuffle(mCardStack);
 	}
 	
 	/**
-	 * Peek at the next card in the deck without removing it
+	 * Peeks at the next card in the deck without removing it
 	 * @return card that is still on the top of the deck
 	 */
 	public Card peek () {
@@ -53,7 +56,7 @@ public class Deck {
 	}
 	
 	/**
-	 * Pop the next card off the deck
+	 * Pops the next card off the deck
 	 * @return card that up until now had been on the top of the deck
 	 */
 	public Card pop() {
@@ -61,8 +64,8 @@ public class Deck {
 	}
 	
 	/**
-	 * True if the given deck is null or of size zero
-	 * @return
+	 * Indicates whether or not the deck is null or of size zero
+	 * @return true if the deck is null or of size zero
 	 */
 	public boolean isEmpty() {
 		return mCardStack == null || mCardStack.isEmpty();
