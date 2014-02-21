@@ -22,7 +22,7 @@ public class CardCountDisparityPlayer extends MiniMaxPlayer {
 				PlayerIdentity owner = board.getBoardSlot(row, col).getOwner();
 				if (owner == getIdentity()) {
 					++rank;
-				} else if (owner == (getIdentity() == PlayerIdentity.LEFT_PLAYER ? PlayerIdentity.RIGHT_PLAYER : PlayerIdentity.RIGHT_PLAYER)) {
+				} else if (owner == (PlayerIdentity.not(getIdentity()))) {
 					--rank;
 				}
 			}
