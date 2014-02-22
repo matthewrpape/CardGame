@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Used to generate Cards for a variety of purposes
  * 
- * @author mpape
+ * @author matthewpape
  */
 public class CardFactory {
 	
@@ -58,22 +58,121 @@ public class CardFactory {
 		defenseMax = Math.max(defenseMax, DEFENSE_MAX);
 		
 		Random randomGenerator = new Random();
-		int attack = getRandomIntBetween(attackMax, attackMin);
-		int defense = getRandomIntBetween(defenseMax, defenseMin);
-		int resistance = getRandomIntBetween(defenseMax, defenseMin);
+		int attack = getRandomIntBetween(attackMin, attackMax);
+		int defense = getRandomIntBetween(defenseMin, defenseMax);
+		int resistance = getRandomIntBetween(defenseMin, defenseMax);
 		AttackType attackType = randomGenerator.nextInt(2) == 0 ? AttackType.MAGICAL : AttackType.PHYSICAL;
-		return new Card("TestCard", null, attackType, attack, resistance, defense);
+		String name = generateRandomName(attackType, attack, defense, resistance);
+		return new Card(name, null, attackType, attack, resistance, defense);
 	}
 	
 	/**
 	 * Generates a psuedo-random int between two values inclusively
-	 * @param max highest possible value for the int
 	 * @param min lowest possible value for the int
+	 * @param max highest possible value for the int
 	 * @return
 	 */
-	private static int getRandomIntBetween(int max, int min) {
+	private static int getRandomIntBetween(int min, int max) {
 		Random randomGenerator = new Random();
 		return randomGenerator.nextInt((max - min) + 1) + min;
 	}
 	
+	private static String generateRandomName(AttackType attackType, int attack, int defense, int resistance) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(generateAdjective(attack, defense, resistance));
+		builder.append(" ");
+		builder.append(generateNoun(attackType, attack));
+		return builder.toString();
+	}
+	
+	private static String generateAdjective(int attack, int defense, int resistance) {
+		int stat = getRandomIntBetween(0, 3);
+		if (stat == 1) {
+			return generateAdjectiveFromAttack(attack);
+		} else if (stat == 2) {
+			return generateAdjectiveFromDefense(defense);
+		} else if (stat == 3) {
+			return generateAdjectiveFromResistance(resistance);
+		} else {
+			return generateAdjectiveFromAllStats(attack + defense + resistance);
+		}
+	}
+	
+	private static String generateNoun(AttackType attackType, int attack) {
+		switch (attackType) {
+		case MAGICAL:
+			if (attack < 2) {
+				return "Faker";
+			} else if (attack < 3) {
+				return "Witch";
+			} else if (attack < 5) {
+				return "Mage";
+			} else {
+				return "Genie";
+			}
+		case PHYSICAL:
+			if (attack < 2) {
+				return "Man";
+			} else if (attack < 3) {
+				return "Cadet";
+			} else if (attack < 5) {
+				return "Knight";
+			} else {
+				return "Hero";
+			}
+		default:
+			return "";
+		}
+	}
+	
+	private static String generateAdjectiveFromAllStats(int total) {
+		if (total < 3) {
+			return "Newbie";
+		} else if (total < 5) {
+			return "Green";
+		} else if (total < 8) {
+			return "Novice";
+		} else if (total < 12) {
+			return "Master";
+		} else {
+			return "Legendary";
+		}
+	}
+	
+	private static String generateAdjectiveFromAttack(int attack) {
+		if (attack < 2) {
+			return "Puny";
+		} else if (attack < 3) {
+			return "Weak";
+		} else if (attack < 5) {
+			return "Tough";
+		} else {
+			return "Iron";
+		}
+	}
+	
+	private static String generateAdjectiveFromDefense(int defense) {
+		if (defense < 1) {
+			return "Frail";
+		} else if (defense < 2) {
+			return "Weak";
+		} else if (defense < 4) {
+			return "Firm";
+		} else {
+			return "Tough";
+		}
+	}
+	
+	private static String generateAdjectiveFromResistance(int resistance) {
+		if (resistance < 1) {
+			return "Dull";
+		} else if (resistance < 2) {
+			return "Keen";
+		} else if (resistance < 4) {
+			return "Wise";
+		} else {
+			return "Sage";
+		}
+	}
+
 }
