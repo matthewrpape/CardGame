@@ -28,5 +28,5 @@ while (game.getWinner() == null) {
 	game.resolveBoard();
 }
 
-System.out.println(game.getWinner())
+System.out.println(game.getWinner());
 ```
