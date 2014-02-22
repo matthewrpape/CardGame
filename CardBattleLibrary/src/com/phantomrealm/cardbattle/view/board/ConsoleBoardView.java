@@ -13,14 +13,30 @@ import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
  */
 public class ConsoleBoardView {
 
-	Board mBoard;
+	private static final int DEFAULT_CARD_WIDTH = 13;
+	private static final int MINIMUM_CARD_WIDTH = 11;
+	
+	private Board mBoard;
+	private int mCardWidth;
 	
 	/**
-	 * Creates a new view for displaying a given board in the console
+	 * Creates a new view for displaying a given board in the console, with each
+	 *  card displaying at the default width
 	 * @param board
 	 */
 	public ConsoleBoardView(Board board) {
+		this(board, DEFAULT_CARD_WIDTH);
+	}
+	
+	/**
+	 * Creates a new view for displaying a given board in the console, with each
+	 *  card displaying at the given width
+	 * @param board
+	 * @param cardWidth must be >= 11
+	 */
+	public ConsoleBoardView(Board board, int cardWidth) {
 		mBoard = board;
+		mCardWidth = Math.max(MINIMUM_CARD_WIDTH, cardWidth);
 	}
 	
 	/**
@@ -93,7 +109,7 @@ public class ConsoleBoardView {
 		} else if (owner == PlayerIdentity.RIGHT_PLAYER) {
 			edge = '>';
 		}
-		for (int i = 0; i < 13; ++i) {
+		for (int i = 0; i < mCardWidth; ++i) {
 			System.out.print(edge);
 		}
 	}
@@ -103,7 +119,7 @@ public class ConsoleBoardView {
 	 */
 	private void printEmpty() {
 		System.out.print("|");
-		for (int i = 0; i < 11; ++i) {
+		for (int i = 0; i < mCardWidth - 2; ++i) {
 			System.out.print(" ");
 		}
 		System.out.print("|");
@@ -115,22 +131,23 @@ public class ConsoleBoardView {
 	 * @param card
 	 */
 	private void printName(Card card) {
-		StringBuilder builder = new StringBuilder("| ");
-		if (card == null) {
-			builder.append("          |");
-		} else {
+		if (card != null) {
+			int width = mCardWidth - 4;
+			StringBuilder builder = new StringBuilder("| ");
 			String name = card.getName();
-			if (name.length() > 9) {
-				builder.append(name.substring(0, 9));
+			if (name.length() > width) {
+				builder.append(name.substring(0, width));
 			} else {
 				builder.append(name);
-				for (int i = 0; i < 9 - name.length(); ++i) {
+				for (int i = 0; i < width - name.length(); ++i) {
 					builder.append(" ");
 				}
 			}
 			builder.append(" |");
+			System.out.print(builder.toString());
+		} else {
+			printEmpty();
 		}
-		System.out.print(builder.toString());
 	}
 	
 	
@@ -141,15 +158,27 @@ public class ConsoleBoardView {
 	 */
 	private void printAttackType(Card card) {
 		if (card != null) {
+			StringBuilder builder = new StringBuilder();
+			String typeString = "";
 			AttackType type = card.getAttackType();
 			switch (type) {
 			case MAGICAL:
-				System.out.print("| type: mag |");
+				typeString = "| type: mag ";
 				break;
 			case PHYSICAL:
-				System.out.print("| type: phys|");
+				typeString = "| type: phys";
 				break;
 			}
+			if (mCardWidth < 13) {
+				builder.append(typeString.substring(0, mCardWidth - 1));
+			} else {
+				builder.append(typeString);
+				for (int i = 0; i < mCardWidth - 13; ++i) {
+					builder.append(" ");
+				}
+			}
+			builder.append("|");
+			System.out.print(builder.toString());
 		} else {
 			printEmpty();
 		}
@@ -162,14 +191,15 @@ public class ConsoleBoardView {
 	 */
 	private void printAttack(Card card) {
 		if (card != null) {
+			int width = mCardWidth - 9;
 			int attack = card.getAttack();	
 			StringBuilder builder = new StringBuilder("| atk: ");
 			String attackString = "" + attack;
-			if (attackString.length() > 4) {
-				builder.append(attackString.subSequence(0, 4));
+			if (attackString.length() > width) {
+				builder.append(attackString.subSequence(0, width));
 			} else {
 				builder.append(attackString);
-				for (int i = 0; i < 4 - attackString.length(); ++i) {
+				for (int i = 0; i < width - attackString.length(); ++i) {
 					builder.append(" ");
 				}
 			}
@@ -187,14 +217,15 @@ public class ConsoleBoardView {
 	 */
 	private void printDefense(Card card) {
 		if (card != null) {
+			int width = mCardWidth - 9;
 			int defense = card.getResistance();	
 			StringBuilder builder = new StringBuilder("| def: ");
 			String defenseString = "" + defense;
-			if (defenseString.length() > 4) {
-				builder.append(defenseString.subSequence(0, 4));
+			if (defenseString.length() > width) {
+				builder.append(defenseString.subSequence(0, width));
 			} else {
 				builder.append(defenseString);
-				for (int i = 0; i < 4 - defenseString.length(); ++i) {
+				for (int i = 0; i < width - defenseString.length(); ++i) {
 					builder.append(" ");
 				}
 			}
@@ -212,14 +243,15 @@ public class ConsoleBoardView {
 	 */
 	private void printResistance(Card card) {
 		if (card != null) {
+			int width = mCardWidth - 9;
 			int resistance = card.getResistance();	
 			StringBuilder builder = new StringBuilder("| res: ");
 			String resistanceString = "" + resistance;
-			if (resistanceString.length() > 4) {
-				builder.append(resistanceString.subSequence(0, 4));
+			if (resistanceString.length() > width) {
+				builder.append(resistanceString.subSequence(0, width));
 			} else {
 				builder.append(resistanceString);
-				for (int i = 0; i < 4 - resistanceString.length(); ++i) {
+				for (int i = 0; i < width - resistanceString.length(); ++i) {
 					builder.append(" ");
 				}
 			}
