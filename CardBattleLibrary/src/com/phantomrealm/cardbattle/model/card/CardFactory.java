@@ -77,6 +77,14 @@ public class CardFactory {
 		return randomGenerator.nextInt((max - min) + 1) + min;
 	}
 	
+	/**
+	 * Generate a pseudo-random name based on the stats of a card
+	 * @param attackType
+	 * @param attack
+	 * @param defense
+	 * @param resistance
+	 * @return
+	 */
 	private static String generateRandomName(AttackType attackType, int attack, int defense, int resistance) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(generateAdjective(attack, defense, resistance));
@@ -85,6 +93,13 @@ public class CardFactory {
 		return builder.toString();
 	}
 	
+	/**
+	 * Generate an adjective based on a pseudo-random set of the stats of a card
+	 * @param attack
+	 * @param defense
+	 * @param resistance
+	 * @return
+	 */
 	private static String generateAdjective(int attack, int defense, int resistance) {
 		int stat = getRandomIntBetween(0, 3);
 		if (stat == 1) {
@@ -98,6 +113,12 @@ public class CardFactory {
 		}
 	}
 	
+	/**
+	 * Generate a noun based on the attack type and attack stat of a card
+	 * @param attackType
+	 * @param attack
+	 * @return
+	 */
 	private static String generateNoun(AttackType attackType, int attack) {
 		switch (attackType) {
 		case MAGICAL:
@@ -125,6 +146,11 @@ public class CardFactory {
 		}
 	}
 	
+	/**
+	 * Generate an adjective based on the combined stats of a card
+	 * @param total
+	 * @return
+	 */
 	private static String generateAdjectiveFromAllStats(int total) {
 		if (total < 3) {
 			return "Newbie";
@@ -139,6 +165,11 @@ public class CardFactory {
 		}
 	}
 	
+	/**
+	 * Generate an adjective based on the attack stat of a card
+	 * @param attack
+	 * @return
+	 */
 	private static String generateAdjectiveFromAttack(int attack) {
 		if (attack < 2) {
 			return "Puny";
@@ -151,6 +182,11 @@ public class CardFactory {
 		}
 	}
 	
+	/**
+	 * Generate an adjective based on the defense stat of a card
+	 * @param defense
+	 * @return
+	 */
 	private static String generateAdjectiveFromDefense(int defense) {
 		if (defense < 1) {
 			return "Frail";
@@ -163,6 +199,11 @@ public class CardFactory {
 		}
 	}
 	
+	/**
+	 * Generate an adjective based on the resistance stat of a card
+	 * @param resistance
+	 * @return
+	 */
 	private static String generateAdjectiveFromResistance(int resistance) {
 		if (resistance < 1) {
 			return "Dull";
