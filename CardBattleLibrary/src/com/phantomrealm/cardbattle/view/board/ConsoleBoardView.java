@@ -23,6 +23,9 @@ public class ConsoleBoardView {
 		mBoard = board;
 	}
 	
+	/**
+	 * Prints the board to the console
+	 */
 	public void displayBoard() {
 		for (int row = 0; row < mBoard.getHeight(); ++row) {
 			displayRow(mBoard.getBoardRow(row));
@@ -30,6 +33,10 @@ public class ConsoleBoardView {
 		System.out.println("");
 	}
 	
+	/**
+	 * Print one row of the board to the console
+	 * @param row
+	 */
 	private void displayRow(BoardSlot[] row) {
 		for (BoardSlot slot : row) {
 			printEdge(slot);
@@ -74,6 +81,10 @@ public class ConsoleBoardView {
 		
 	}
 	
+	/**
+	 * Prints the upper or lower edge for a single slot
+	 * @param slot
+	 */
 	private void printEdge(BoardSlot slot) {
 		PlayerIdentity owner = slot.getOwner();
 		char edge = '=';
@@ -87,6 +98,9 @@ public class ConsoleBoardView {
 		}
 	}
 	
+	/**
+	 * Prints an empty row within a single slot
+	 */
 	private void printEmpty() {
 		System.out.print("|");
 		for (int i = 0; i < 11; ++i) {
@@ -95,6 +109,11 @@ public class ConsoleBoardView {
 		System.out.print("|");
 	}
 	
+	/**
+	 * Prints the name of the card within a single slot, or a substring
+	 *  of the name if it is too long, or an empty row if the card is null
+	 * @param card
+	 */
 	private void printName(Card card) {
 		StringBuilder builder = new StringBuilder("| ");
 		if (card == null) {
@@ -114,6 +133,12 @@ public class ConsoleBoardView {
 		System.out.print(builder.toString());
 	}
 	
+	
+	/**
+	 * Prints the AttackType of the card within a single slot,
+	 *  or an empty row if the card is null
+	 * @param card
+	 */
 	private void printAttackType(Card card) {
 		if (card != null) {
 			AttackType type = card.getAttackType();
@@ -130,6 +155,11 @@ public class ConsoleBoardView {
 		}
 	}
 	
+	/**
+	 * Prints the attack of the card within a single slot, or a substring
+	 *  of the attack if it is too long, or an empty row if the card is null
+	 * @param card
+	 */
 	private void printAttack(Card card) {
 		if (card != null) {
 			int attack = card.getAttack();	
@@ -150,6 +180,11 @@ public class ConsoleBoardView {
 		}
 	}
 	
+	/**
+	 * Prints the defense of the card within a single slot, or a substring
+	 *  of the defense if it is too long, or an empty row if the card is null
+	 * @param card
+	 */
 	private void printDefense(Card card) {
 		if (card != null) {
 			int defense = card.getResistance();	
@@ -170,6 +205,11 @@ public class ConsoleBoardView {
 		}
 	}
 	
+	/**
+	 * Prints the resistance of the card within a single slot, or a substring
+	 *  of the resistance if it is too long, or an empty row if the card is null
+	 * @param card
+	 */
 	private void printResistance(Card card) {
 		if (card != null) {
 			int resistance = card.getResistance();	
