@@ -331,4 +331,24 @@ public class Board {
 		}
 		return moves;
 	}
+	
+	/**
+	 * Indicates whether or not a given move is valid for a given player
+	 * @param player
+	 * @param move
+	 * @return
+	 */
+	public boolean isValidMove(PlayerIdentity player, Position move) {
+		if (move == null) {
+			return false;
+		}
+		
+		List<Position> moves = getPossibleMoves(player);
+		for (Position position : moves) {
+			if (position.getRow() == move.getRow() && position.getColumn() == move.getColumn()) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
