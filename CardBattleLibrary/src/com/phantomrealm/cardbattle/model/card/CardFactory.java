@@ -55,7 +55,7 @@ public class CardFactory {
 		attackMax = Math.max(attackMin, attackMax);
 		attackMax = Math.min(attackMax, ATTACK_MAX);
 		defenseMax = Math.max(defenseMin, defenseMax);
-		defenseMax = Math.max(defenseMax, DEFENSE_MAX);
+		defenseMax = Math.min(defenseMax, DEFENSE_MAX);
 		
 		Random randomGenerator = new Random();
 		int attack = getRandomIntBetween(attackMin, attackMax);
@@ -122,24 +122,24 @@ public class CardFactory {
 	private static String generateNoun(AttackType attackType, int attack) {
 		switch (attackType) {
 		case MAGICAL:
-			if (attack < 2) {
-				return "Faker";
-			} else if (attack < 3) {
-				return "Witch";
-			} else if (attack < 5) {
-				return "Mage";
-			} else {
+			if (attack > 4) {
 				return "Genie";
+			} else if (attack > 2) {
+				return "Mage";
+			} else if (attack > 1) {
+				return "Witch";
+			} else {
+				return "Faker";
 			}
 		case PHYSICAL:
-			if (attack < 2) {
-				return "Man";
-			} else if (attack < 3) {
-				return "Cadet";
-			} else if (attack < 5) {
-				return "Knight";
-			} else {
+			if (attack > 4) {
 				return "Hero";
+			} else if (attack > 2) {
+				return "Knight";
+			} else if (attack > 1) {
+				return "Cadet";
+			} else {
+				return "Man";
 			}
 		default:
 			return "";
@@ -152,16 +152,14 @@ public class CardFactory {
 	 * @return
 	 */
 	private static String generateAdjectiveFromAllStats(int total) {
-		if (total < 3) {
-			return "Newbie";
-		} else if (total < 5) {
-			return "Green";
-		} else if (total < 8) {
-			return "Novice";
-		} else if (total < 12) {
+		if (total > 10) {
 			return "Master";
+		} else if (total > 4) {
+			return "Novice";
+		} else if (total > 2) {
+			return "Green";
 		} else {
-			return "Legendary";
+			return "Newbie";
 		}
 	}
 	
@@ -171,14 +169,14 @@ public class CardFactory {
 	 * @return
 	 */
 	private static String generateAdjectiveFromAttack(int attack) {
-		if (attack < 2) {
-			return "Puny";
-		} else if (attack < 3) {
-			return "Weak";
-		} else if (attack < 5) {
-			return "Tough";
-		} else {
+		if (attack > 4) {
 			return "Iron";
+		} else if (attack > 2) {
+			return "Tough";
+		} else if (attack > 1) {
+			return "Puny";
+		} else {
+			return "Tiny";
 		}
 	}
 	
@@ -188,14 +186,14 @@ public class CardFactory {
 	 * @return
 	 */
 	private static String generateAdjectiveFromDefense(int defense) {
-		if (defense < 1) {
-			return "Frail";
-		} else if (defense < 2) {
+		if (defense > 3) {
+			return "Armor";
+		} else if (defense > 1) {
+			return "Solid";
+		} else if (defense > 0) {
 			return "Weak";
-		} else if (defense < 4) {
-			return "Firm";
 		} else {
-			return "Tough";
+			return "Frail";
 		}
 	}
 	
@@ -205,14 +203,14 @@ public class CardFactory {
 	 * @return
 	 */
 	private static String generateAdjectiveFromResistance(int resistance) {
-		if (resistance < 1) {
-			return "Dull";
-		} else if (resistance < 2) {
-			return "Keen";
-		} else if (resistance < 4) {
-			return "Wise";
-		} else {
+		if (resistance > 3) {
 			return "Sage";
+		} else if (resistance > 1) {
+			return "Wise";
+		} else if (resistance > 0) {
+			return "Keen";
+		} else {
+			return "Dull";
 		}
 	}
 
