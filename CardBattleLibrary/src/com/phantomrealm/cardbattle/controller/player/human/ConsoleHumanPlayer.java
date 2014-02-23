@@ -31,8 +31,7 @@ public class ConsoleHumanPlayer extends BasePlayer {
 	@Override
 	public Position getMove(Board board, Deck opponentDeck) {
 		Card card = getDeck().peek();
-		System.out.println(card.getName() + " type: " + card.getAttackType() + ", atk: "
-				+ card.getAttack() + ", def: " + card.getDefense() + ", res: " + card.getResistance());
+		System.out.println(card.toString());
 		Position move = null;
 		List<Position> moves = board.getPossibleMoves(getIdentity());
 		System.out.print("Possible moves: ");

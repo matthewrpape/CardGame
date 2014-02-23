@@ -29,7 +29,7 @@ public class CardTest {
 	@Test
 	public void testClone() {
 		final String newName = "Leveled Newb";
-		final AttackType  newType = AttackType.MAGICAL;
+		final AttackType newType = AttackType.MAGICAL;
 		final int newAttack = 2;
 		final int newResistance = 3;
 		final int newDefense = 4;
@@ -55,6 +55,67 @@ public class CardTest {
 		Card card = createCard();
 		assertThat(card.getDefenseForAttackType(AttackType.MAGICAL), equalTo(TEST_RESISTANCE));
 		assertThat(card.getDefenseForAttackType(AttackType.PHYSICAL), equalTo(TEST_DEFENSE));
+	}
+	
+	@Test
+	public void testEquals_Name() {
+		final String newName = "Bogus Weirdo";
+		Card cardOne = createCard();
+		Card cardTwo = createCard();
+		assertThat(cardOne.equals(cardTwo), equalTo(true));
+		
+		cardOne.setName(newName);
+		assertThat(cardOne.equals(cardTwo), equalTo(false));
+	}
+	
+	@Test
+	public void testEquals_AttackType() {
+		final AttackType newType = AttackType.MAGICAL;
+		Card cardOne = createCard();
+		Card cardTwo = createCard();
+		assertThat(cardOne.equals(cardTwo), equalTo(true));
+		
+		cardOne.setAttackType(newType);
+		assertThat(cardOne.equals(cardTwo), equalTo(false));
+	}
+	
+	@Test
+	public void testEquals_Attack() {
+		final int newAttack = 5;
+		Card cardOne = createCard();
+		Card cardTwo = createCard();
+		assertThat(cardOne.equals(cardTwo), equalTo(true));
+		
+		cardOne.setAttack(newAttack);
+		assertThat(cardOne.equals(cardTwo), equalTo(false));
+	}
+	
+	@Test
+	public void testEquals_Defense() {
+		final int newDefense = 4;
+		Card cardOne = createCard();
+		Card cardTwo = createCard();
+		assertThat(cardOne.equals(cardTwo), equalTo(true));
+		
+		cardOne.setDefense(newDefense);
+		assertThat(cardOne.equals(cardTwo), equalTo(false));
+	}
+	
+	@Test
+	public void testEquals_Resistance() {
+		final int newResistance = 0;
+		Card cardOne = createCard();
+		Card cardTwo = createCard();
+		assertThat(cardOne.equals(cardTwo), equalTo(true));
+		
+		cardOne.setResistance(newResistance);
+		assertThat(cardOne.equals(cardTwo), equalTo(false));
+	}
+	
+	@Test
+	public void testEquals_NullCard() {
+		Card card = createCard();
+		assertThat(card.equals(null), equalTo(false));
 	}
 
 	private Card createCard() {

@@ -16,8 +16,8 @@ import com.phantomrealm.cardbattle.model.card.Card;
  */
 public class Board {
 
-	private static final int DEFAULT_BOARD_WIDTH = 5;
-	private static final int DEFAULT_BOARD_HEIGHT = 5;
+	private static final int DEFAULT_BOARD_WIDTH = 3;
+	private static final int DEFAULT_BOARD_HEIGHT = 3;
 	private static final int MIN_BOARD_WIDTH = 2;
 	private static final int MIN_BOARD_HEIGHT = 1;
 	
@@ -25,7 +25,7 @@ public class Board {
 	private BoardSlot[][] mBoardSlots;
 	
 	/**
-	 * Creates a board of default size (5x5)
+	 * Creates a board of default size (3x3)
 	 */
 	public Board() {
 		this(DEFAULT_BOARD_WIDTH, DEFAULT_BOARD_HEIGHT);
@@ -42,7 +42,7 @@ public class Board {
 	public Board(int boardWidth, int boardHeight) {
 		mListener = new EmptyGameControllerListener();
 		boardWidth = Math.max(boardWidth, MIN_BOARD_WIDTH);
-		boardHeight = Math.max(boardWidth, MIN_BOARD_HEIGHT);
+		boardHeight = Math.max(boardHeight, MIN_BOARD_HEIGHT);
 		mBoardSlots = new BoardSlot[boardHeight][boardWidth];
 		for (int row = 0; row < boardHeight; ++row) {
 			for (int col = 0; col < boardWidth; ++col) {

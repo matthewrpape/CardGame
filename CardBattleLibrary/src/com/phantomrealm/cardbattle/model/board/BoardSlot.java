@@ -52,6 +52,27 @@ public class BoardSlot {
 	}
 	
 	/**
+	 * Indicates whether or not two BoardSlots are equivalent to each other
+	 * @param slot
+	 * @return
+	 */
+	public boolean equals(BoardSlot slot) {
+		if (slot == null || slot.getOwner() != getOwner()) {
+			return false;
+		}
+		
+		if (getCard() != null) {
+			if(!getCard().equals(slot.getCard())) {
+				return false;
+			}
+		} else if (slot.getCard() != null) {
+			return false;
+		}
+
+		return true;
+	}
+	
+	/**
 	 * Gets the string representation of a board slot
 	 */
 	public String toString() {
