@@ -218,7 +218,7 @@ public class ConsoleBoardView {
 	private void printDefense(Card card) {
 		if (card != null) {
 			int width = mCardWidth - 9;
-			int defense = card.getResistance();	
+			int defense = card.getDefense();	
 			StringBuilder builder = new StringBuilder("| def: ");
 			String defenseString = "" + defense;
 			if (defenseString.length() > width) {
