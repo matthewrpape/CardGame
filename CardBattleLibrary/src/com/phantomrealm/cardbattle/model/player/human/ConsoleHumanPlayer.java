@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.phantomrealm.cardbattle.model.player.human;
 
 import java.io.BufferedReader;
@@ -22,6 +19,11 @@ import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
  */
 public class ConsoleHumanPlayer extends BasePlayer {
 
+	/**
+	 * Creates a new player who accepts input through the console to make moves
+	 * @param identity
+	 * @param deck
+	 */
 	public ConsoleHumanPlayer(PlayerIdentity identity, Deck deck) {
 		super(identity, deck);
 	}
@@ -37,25 +39,26 @@ public class ConsoleHumanPlayer extends BasePlayer {
 		for (Position position : moves) {
 			System.out.print("(" + position.getColumn() + ", " + position.getRow() + ") ");
 		}
+		System.out.println("");
 		while (!board.isValidMove(getIdentity(), move)) {
 			try {
 				BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		        System.out.println("Enter move:");
+		        System.out.println("Enter move \"x, y\":");
 		        String input = reader.readLine();
+		        input = input.replaceAll("\\s+","");
+		        System.out.println("input: " + input);
 				int col = Integer.parseInt(input.substring(0, input.indexOf(',')));
-				int row = Integer.parseInt(input.substring(input.indexOf(',') + 2));
+				int row = Integer.parseInt(input.substring(input.indexOf(',') + 1));
 				move = new Position(row, col);
 			} catch (IOException exception) {
-				System.out.println("use \"x, y\"");
+				System.out.println(exception.toString());
 			} catch (NumberFormatException exception) {
-				System.out.println("use \"x, y\"");
+				System.out.println(exception.toString());
 			} catch (StringIndexOutOfBoundsException exception) {
-				System.out.println("use \"x, y\"");
+				System.out.println(exception.toString());
 			}
 		}
 		return move;
 	}
-	
-	
 
 }
