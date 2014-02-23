@@ -1,10 +1,10 @@
 package com.phantomrealm.cardbattle.view.board;
 
+import com.phantomrealm.cardbattle.controller.player.PlayerIdentity;
 import com.phantomrealm.cardbattle.model.board.Board;
 import com.phantomrealm.cardbattle.model.board.BoardSlot;
 import com.phantomrealm.cardbattle.model.card.AttackType;
 import com.phantomrealm.cardbattle.model.card.Card;
-import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
 
 /**
  * Displays a visual representation of a Board

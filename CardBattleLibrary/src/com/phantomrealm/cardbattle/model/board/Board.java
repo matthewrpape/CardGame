@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.phantomrealm.cardbattle.controller.game.EmptyGameControllerListener;
 import com.phantomrealm.cardbattle.controller.game.GameControllerListener;
+import com.phantomrealm.cardbattle.controller.player.PlayerIdentity;
 import com.phantomrealm.cardbattle.model.card.AttackType;
 import com.phantomrealm.cardbattle.model.card.Card;
-import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
 
 /**
  * Model object used to represent the board on which the game is played

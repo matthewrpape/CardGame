@@ -1,4 +1,4 @@
-package com.phantomrealm.cardbattle.model.player;
+package com.phantomrealm.cardbattle.controller.player;
 
 /**
  * Indicates the identity of a given player (playing on the left side of the board or the right)

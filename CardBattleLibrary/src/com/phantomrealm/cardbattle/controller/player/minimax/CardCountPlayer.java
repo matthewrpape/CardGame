@@ -1,8 +1,8 @@
-package com.phantomrealm.cardbattle.model.player.minimax;
+package com.phantomrealm.cardbattle.controller.player.minimax;
 
+import com.phantomrealm.cardbattle.controller.player.PlayerIdentity;
 import com.phantomrealm.cardbattle.model.board.Board;
 import com.phantomrealm.cardbattle.model.deck.Deck;
-import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
 
 /**
  * A player who favors the move that results in having the most of their own cards on the board

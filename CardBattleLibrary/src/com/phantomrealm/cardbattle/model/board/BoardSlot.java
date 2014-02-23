@@ -1,7 +1,7 @@
 package com.phantomrealm.cardbattle.model.board;
 
+import com.phantomrealm.cardbattle.controller.player.PlayerIdentity;
 import com.phantomrealm.cardbattle.model.card.Card;
-import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
 
 /**
  * Model object used to represent a single position on the game board

@@ -1,11 +1,11 @@
-package com.phantomrealm.cardbattle.model.player.minimax;
+package com.phantomrealm.cardbattle.controller.player.minimax;
 
+import com.phantomrealm.cardbattle.controller.player.BasePlayer;
+import com.phantomrealm.cardbattle.controller.player.PlayerIdentity;
 import com.phantomrealm.cardbattle.model.board.Board;
 import com.phantomrealm.cardbattle.model.board.Position;
 import com.phantomrealm.cardbattle.model.card.Card;
 import com.phantomrealm.cardbattle.model.deck.Deck;
-import com.phantomrealm.cardbattle.model.player.BasePlayer;
-import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
 
 /**
  * Abstract representation of a player who uses the minimax algorithm to pick its next move
