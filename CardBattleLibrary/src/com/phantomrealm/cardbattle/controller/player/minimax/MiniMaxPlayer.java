@@ -81,7 +81,7 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 		if (depth == 0) {
 			return evaluate(board);
 		} else if (opponentDeck.isEmpty()) {
-			return Integer.MAX_VALUE - 1;
+			return evaluateWin(board);
 		} else {
 			int worstRank = Integer.MAX_VALUE;
 			PlayerIdentity opponent = PlayerIdentity.not(getIdentity());
@@ -114,7 +114,7 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 		if (depth == 0) {
 			return evaluate(board);
 		} else if (playerDeck.isEmpty() ){
-			return 0;
+			return evaluateLoss(board);
 		} else {
 			int bestRank = -1;
 			for (Position move : board.getPossibleMoves(getIdentity())) {
@@ -148,19 +148,45 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 		board.resolveBoardStalemate();
 		PlayerIdentity winner = board.getWinner();
 		if (winner == getIdentity()) { 
-			return Integer.MAX_VALUE - 1;
+			return evaluateWin(board);
 		} else if (winner == PlayerIdentity.not(getIdentity())) {
-			return 0;
+			return evaluateLoss(board);
 		} else {
 			return -1;
 		}
 	}
 	
 	/**
-	 * Gets a numerical ranking of how desirable a given board is
+	 * Gets a numerical ranking of how desirable a given board is. Note that this
+	 *  rank should be positive and should be less than max int for the minimax
+	 *  algorithm to work properly.
 	 * @param board
 	 * @return
 	 */
 	protected abstract int evaluate(Board board);
+	
+	/**
+	 * Gets a numerical ranking of how desirable a given board in the particular
+	 *  case where the player will have win. Default behavior is to evaluate the
+	 *  same as any other case, but a different behavior can be achieved by
+	 *  overriding this function (for instance to return a much higher rank).
+	 * @param board
+	 * @return
+	 */
+	protected int evaluateWin(Board board) {
+		return evaluate(board);
+	}
+	
+	/**
+	 * Gets a numerical ranking of how desirable a given board in the particular
+	 *  case where the player will have lost. Default behavior is to evaluate the
+	 *  same as any other case, but a different behavior can be achieved by
+	 *  overriding this function (for instance to return a much lower rank).
+	 * @param board
+	 * @return
+	 */
+	protected int evaluateLoss(Board board) {
+		return evaluate(board);
+	}
 
 }
