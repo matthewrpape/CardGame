@@ -1,10 +1,10 @@
-package com.phantomrealm.cardbattle.model.player.algorithmic;
+package com.phantomrealm.cardbattle.controller.player.algorithmic;
 
+import com.phantomrealm.cardbattle.controller.player.BasePlayer;
+import com.phantomrealm.cardbattle.controller.player.PlayerIdentity;
 import com.phantomrealm.cardbattle.model.board.Board;
 import com.phantomrealm.cardbattle.model.board.Position;
 import com.phantomrealm.cardbattle.model.deck.Deck;
-import com.phantomrealm.cardbattle.model.player.BasePlayer;
-import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
 
 /**
  * Abstract representation of a player who uses an algorithm to pick its next move

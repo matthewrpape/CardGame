@@ -1,4 +1,4 @@
-package com.phantomrealm.cardbattle.model.player;
+package com.phantomrealm.cardbattle.controller.player;
 
 import com.phantomrealm.cardbattle.model.board.Board;
 import com.phantomrealm.cardbattle.model.board.Position;

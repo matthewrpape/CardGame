@@ -1,9 +1,9 @@
 package com.phantomrealm.cardbattle.controller.game;
 
+import com.phantomrealm.cardbattle.controller.player.Player;
+import com.phantomrealm.cardbattle.controller.player.PlayerIdentity;
 import com.phantomrealm.cardbattle.model.board.Board;
 import com.phantomrealm.cardbattle.model.board.Position;
-import com.phantomrealm.cardbattle.model.player.Player;
-import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
 
 /**
  * Controller class that implements the logic necessary to play the card game

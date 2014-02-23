@@ -1,26 +1,25 @@
-package com.phantomrealm.cardbattle.model.player.algorithmic;
+package com.phantomrealm.cardbattle.controller.player.algorithmic;
 
 import java.util.List;
-import java.util.Random;
 
+import com.phantomrealm.cardbattle.controller.player.PlayerIdentity;
 import com.phantomrealm.cardbattle.model.board.Board;
 import com.phantomrealm.cardbattle.model.board.Position;
 import com.phantomrealm.cardbattle.model.deck.Deck;
-import com.phantomrealm.cardbattle.model.player.PlayerIdentity;
 
 /**
- * A player who selects a psuedo-random position of the possible choices for its next move
+ * A player who selects the first position of the possible choices for its next move
  * 
  * @author matthewpape
  */
-public class RandomPlayer extends AlgorithmicPlayer {
+public class OrderedPlayer extends AlgorithmicPlayer {
 
 	/**
-	 * Creates a RandomPlayer with a given identity and deck
+	 * Creates an OrderedPlayer with a given identity and deck
 	 * @param identity
 	 * @param deck
 	 */
-	public RandomPlayer(PlayerIdentity identity, Deck deck) {
+	public OrderedPlayer(PlayerIdentity identity, Deck deck) {
 		super(identity, deck);
 	}
 
@@ -30,8 +29,7 @@ public class RandomPlayer extends AlgorithmicPlayer {
 	@Override
 	protected Position generateMove(Board board) {
 		List<Position> availableMoves = board.getPossibleMoves(getIdentity());
-		Random randomGenerator = new Random();
-		return availableMoves.get(randomGenerator.nextInt(availableMoves.size()));
+		return availableMoves.get(0);
 	}
 
 }
