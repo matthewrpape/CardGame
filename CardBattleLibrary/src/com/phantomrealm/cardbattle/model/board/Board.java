@@ -153,9 +153,10 @@ public class Board {
 	 * @param move
 	 */
 	public void executeMove(Card card, PlayerIdentity cardOwner, Position move) {
-		if (move == null) { 
-			System.out.println("NULL MOVE");
+		if (move == null) {
+			return;
 		}
+		
 		mListener.onCardMoved(cardOwner, move);
 		BoardSlot position = getBoardSlot(move.getRow(), move.getColumn());
 		position.setCard(card);

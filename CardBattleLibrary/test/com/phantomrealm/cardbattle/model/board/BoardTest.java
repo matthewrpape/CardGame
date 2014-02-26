@@ -77,6 +77,57 @@ public class BoardTest {
 		assertThat(testBoard.getPosition(testSlot), nullValue());
 	}
 	
+	@Test
+	public void testIsFull_NotFull() {
+		final Board testBoard = createTestBoard();
+		assertThat(testBoard.isFull(), equalTo(false));
+	}
+	
+	@Test
+	public void testIsFull_Full() {
+		final Board testBoard = createTestBoard();
+		final Card testCard = createTestCard();
+		for (int row = 0; row < testBoard.getHeight(); ++row) {
+			for (int col = 0; col < testBoard.getWidth(); ++col) {
+				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
+				testSlot.setCard(testCard);
+				testSlot.setSlotOwner(PlayerIdentity.LEFT_PLAYER);
+			}
+		}
+		assertThat(testBoard.isFull(), equalTo(true));
+	}
+	
+	@Test
+	public void testExecuteMove_NullMove() {
+		final Board testBoard = createTestBoard();
+		final Board clonedBoard = testBoard.clone();
+		testBoard.executeMove(createTestCard(), PlayerIdentity.LEFT_PLAYER, null);
+		// move should fail, leaving the testBoard in the same state as the clonedBoard
+		for (int row = 0; row < testBoard.getHeight(); ++row) {
+			for (int col = 0; col < testBoard.getWidth(); ++col) {
+				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
+				final BoardSlot cloneSlot = clonedBoard.getBoardSlot(row, col);
+				assertThat(testSlot.equals(cloneSlot), equalTo(true));
+			}
+		}
+	}
+	
+	@Test
+	public void testExecuteMove_ValidMove() {
+		final Board testBoard = createTestBoard();
+		final Card testCard = createTestCard();
+		final PlayerIdentity testOwner = PlayerIdentity.RIGHT_PLAYER;
+		final int testRow = 0;
+		final int testCol = 0;
+		final Position testPosition = new Position(testRow, testCol);
+		assertThat(testBoard.getBoardSlot(testRow, testCol).getOwner(), nullValue());
+		assertThat(testBoard.getBoardSlot(testRow, testCol).getCard(), nullValue());
+		
+		testBoard.executeMove(testCard, testOwner, testPosition);
+		assertThat(testBoard.getBoardSlot(testRow, testCol).getOwner(), equalTo(testOwner));
+		assertThat(testBoard.getBoardSlot(testRow, testCol).getCard(), equalTo(testCard));
+	}
+	
 	/**
 	 * Create a sample board for testing. The sample board will have a card in one slot.
 	 * @return
@@ -88,8 +139,8 @@ public class BoardTest {
 		final int testCol = 0;
 		final PlayerIdentity testOwner = PlayerIdentity.LEFT_PLAYER;
 		final Board board = new Board(testWidth, testHeight);
-		board.getBoardSlot(testCol, testRow).setCard(createTestCard());
-		board.getBoardSlot(testCol, testRow).setSlotOwner(testOwner);
+		board.getBoardSlot(testRow, testCol).setCard(createTestCard());
+		board.getBoardSlot(testRow, testCol).setSlotOwner(testOwner);
 		return board;
 	}
 	
