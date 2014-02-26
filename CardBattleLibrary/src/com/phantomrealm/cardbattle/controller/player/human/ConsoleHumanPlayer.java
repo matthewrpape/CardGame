@@ -45,7 +45,6 @@ public class ConsoleHumanPlayer extends BasePlayer {
 		        System.out.println("Enter move \"x, y\":");
 		        String input = reader.readLine();
 		        input = input.replaceAll("\\s+","");
-		        System.out.println("input: " + input);
 				int col = Integer.parseInt(input.substring(0, input.indexOf(',')));
 				int row = Integer.parseInt(input.substring(input.indexOf(',') + 1));
 				move = new Position(row, col);
