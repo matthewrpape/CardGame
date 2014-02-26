@@ -219,6 +219,80 @@ public class BoardTest {
 		assertThat(testRightSlot.getCard().equals(testCard), equalTo(true));
 	}
 	
+	@Test
+	public void testResolveBoardStalemates_NoStalemates() {
+		final Board testBoard = createTestBoard();
+		final Board clonedBoard = testBoard.clone();
+		testBoard.resolveBoardStalemates();
+		// there should be no stalemates to resolve, leaving the testBoard in the same state as the clonedBoard
+		for (int row = 0; row < testBoard.getHeight(); ++row) {
+			for (int col = 0; col < testBoard.getWidth(); ++col) {
+				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
+				final BoardSlot cloneSlot = clonedBoard.getBoardSlot(row, col);
+				assertThat(testSlot.equals(cloneSlot), equalTo(true));
+			}
+		}
+	}
+	
+	@Test
+	public void testResolveBoardStalemates_BoardNotFull() {
+		final Board testBoard = createTestBoard();
+		final int testRow = 1;
+		final int testCol = 1;
+		final PlayerIdentity testOwner = PlayerIdentity.RIGHT_PLAYER;
+		final Card testCard = createTestCard();
+		testCard.setAttack(4);
+		testCard.setDefense(5);
+		testBoard.getBoardSlot(testRow, testCol).setCard(testCard);
+		testBoard.getBoardSlot(testRow, testCol).setSlotOwner(testOwner);
+		final Board clonedBoard = testBoard.clone();
+		testBoard.resolveBoardConflicts();
+		// there is one stalemate, but it won't be resolved because the board is not empty
+		for (int row = 0; row < testBoard.getHeight(); ++row) {
+			for (int col = 0; col < testBoard.getWidth(); ++col) {
+				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
+				final BoardSlot cloneSlot = clonedBoard.getBoardSlot(row, col);
+				assertThat(testSlot.equals(cloneSlot), equalTo(true));
+			}
+		}
+	}
+	
+	@Test
+	public void testResolveBoardStalemates_BoardFull() {
+		// fill the board
+		final Board testBoard = new Board(2, 2);
+		final PlayerIdentity testOwner = PlayerIdentity.RIGHT_PLAYER;
+		for (int row = 0; row < testBoard.getHeight(); ++row) {
+			for (int col = 0; col < testBoard.getWidth(); ++col) {
+				testBoard.executeMove(createTestCard(), testOwner, new Position(row, col));
+			}
+		}
+		
+		// create a stalemate
+		final int testRow = 0;
+		final int leftCol = 0;
+		final int rightCol = 1;
+		final Card testCard = createTestCard();
+		testCard.setAttack(4);
+		testCard.setDefense(5);
+		testBoard.getBoardSlot(testRow, leftCol).setCard(testCard);
+		testBoard.getBoardSlot(testRow, leftCol).setSlotOwner(PlayerIdentity.not(testOwner));
+		final Board clonedBoard = testBoard.clone();
+		testBoard.resolveBoardStalemates();
+		
+		// there is one stalemate, and it should be removed
+		final BoardSlot testLeftSlot = testBoard.getBoardSlot(testRow, leftCol);
+		final BoardSlot testRightSlot = testBoard.getBoardSlot(testRow, rightCol);
+		final BoardSlot cloneLeftSlot = clonedBoard.getBoardSlot(testRow, leftCol);
+		final BoardSlot cloneRightSlot = clonedBoard.getBoardSlot(testRow, rightCol);
+		assertThat(testLeftSlot.equals(cloneLeftSlot), equalTo(false));
+		assertThat(testRightSlot.equals(cloneRightSlot), equalTo(false));
+		assertThat(testLeftSlot.getOwner(), equalTo(null));
+		assertThat(testLeftSlot.getCard(), equalTo(null));
+		assertThat(testRightSlot.getOwner(), equalTo(null));
+		assertThat(testRightSlot.getCard(), equalTo(null));
+	}
+	
 	/**
 	 * Create a sample board for testing. The sample board will have a card in one slot.
 	 * @return

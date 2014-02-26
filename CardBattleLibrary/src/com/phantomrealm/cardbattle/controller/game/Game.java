@@ -94,7 +94,7 @@ public class Game {
 	 */
 	public void resolveBoard() {
 		mBoard.resolveBoardConflicts();
-		mBoard.resolveBoardStalemate();
+		mBoard.resolveBoardStalemates();
 	}
 	
 	/**

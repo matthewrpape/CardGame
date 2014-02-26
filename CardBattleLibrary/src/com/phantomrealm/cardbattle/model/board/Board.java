@@ -242,7 +242,7 @@ public class Board {
 	/**
 	 * Clears out all stalemated cards if the board is full
 	 */
-	public void resolveBoardStalemate() {
+	public void resolveBoardStalemates() {
 		if (isFull()) {
 			for (int row = 0; row < getHeight(); ++row) {
 				unstalemateRow(getBoardRow(row));

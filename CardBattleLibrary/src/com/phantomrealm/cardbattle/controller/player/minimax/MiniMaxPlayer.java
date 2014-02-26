@@ -145,7 +145,7 @@ public abstract class MiniMaxPlayer extends BasePlayer {
 	private int updateBoard(Board board, Card card, PlayerIdentity player, Position move) {
 		board.executeMove(card, player, move);
 		board.resolveBoardConflicts();
-		board.resolveBoardStalemate();
+		board.resolveBoardStalemates();
 		PlayerIdentity winner = board.getWinner();
 		if (winner == getIdentity()) { 
 			return evaluateWin(board);
