@@ -128,13 +128,104 @@ public class BoardTest {
 		assertThat(testBoard.getBoardSlot(testRow, testCol).getCard(), equalTo(testCard));
 	}
 	
+	@Test
+	public void testResolveBoardConflicts_NoConflicts() {
+		final Board testBoard = createTestBoard();
+		final Board clonedBoard = testBoard.clone();
+		testBoard.resolveBoardConflicts();
+		// there should be no conflicts to resolve, leaving the testBoard in the same state as the clonedBoard
+		for (int row = 0; row < testBoard.getHeight(); ++row) {
+			for (int col = 0; col < testBoard.getWidth(); ++col) {
+				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
+				final BoardSlot cloneSlot = clonedBoard.getBoardSlot(row, col);
+				assertThat(testSlot.equals(cloneSlot), equalTo(true));
+			}
+		}
+	}
+	
+	@Test
+	public void testResolveBoardConflicts_OneStalemate() {
+		final Board testBoard = createTestBoard();
+		final int testRow = 1;
+		final int testCol = 1;
+		final PlayerIdentity testOwner = PlayerIdentity.RIGHT_PLAYER;
+		final Card testCard = createTestCard();
+		testCard.setAttack(4);
+		testCard.setDefense(5);
+		testBoard.getBoardSlot(testRow, testCol).setCard(testCard);
+		testBoard.getBoardSlot(testRow, testCol).setSlotOwner(testOwner);
+		final Board clonedBoard = testBoard.clone();
+		testBoard.resolveBoardConflicts();
+		// the only conflict should be a stalemate, leaving the testBoard in the same state as the clonedBoard
+		for (int row = 0; row < testBoard.getHeight(); ++row) {
+			for (int col = 0; col < testBoard.getWidth(); ++col) {
+				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
+				final BoardSlot cloneSlot = clonedBoard.getBoardSlot(row, col);
+				assertThat(testSlot.equals(cloneSlot), equalTo(true));
+			}
+		}
+	}
+	
+	@Test
+	public void testResolveBoardConflicts_ConflictBothDie() {
+		final Board testBoard = createTestBoard();
+		final int testRow = 1;
+		final int testCol = 1;
+		final int leftCol = 0;
+		final PlayerIdentity testOwner = PlayerIdentity.RIGHT_PLAYER;
+		final Card testCard = createTestCard();
+		testBoard.getBoardSlot(testRow, testCol).setCard(testCard);
+		testBoard.getBoardSlot(testRow, testCol).setSlotOwner(testOwner);
+		final Board clonedBoard = testBoard.clone();
+		
+		testBoard.resolveBoardConflicts();
+		// the only conflict should result in both cards being destroyed
+		final BoardSlot testLeftSlot = testBoard.getBoardSlot(testRow, leftCol);
+		final BoardSlot testRightSlot = testBoard.getBoardSlot(testRow, testCol);
+		final BoardSlot cloneLeftSlot = clonedBoard.getBoardSlot(testRow, leftCol);
+		final BoardSlot cloneRightSlot = clonedBoard.getBoardSlot(testRow, testCol);
+		assertThat(testLeftSlot.equals(cloneLeftSlot), equalTo(false));
+		assertThat(testRightSlot.equals(cloneRightSlot), equalTo(false));
+		assertThat(testLeftSlot.getOwner(), equalTo(null));
+		assertThat(testLeftSlot.getCard(), equalTo(null));
+		assertThat(testRightSlot.getOwner(), equalTo(null));
+		assertThat(testRightSlot.getCard(), equalTo(null));
+	}
+	
+	@Test
+	public void testResolveBoardConflicts_ConflictOneDies() {
+		final Board testBoard = createTestBoard();
+		final int testRow = 1;
+		final int testCol = 1;
+		final int leftCol = 0;
+		final PlayerIdentity testOwner = PlayerIdentity.RIGHT_PLAYER;
+		final Card testCard = createTestCard();
+		testCard.setDefense(5);
+		testBoard.getBoardSlot(testRow, testCol).setCard(testCard);
+		testBoard.getBoardSlot(testRow, testCol).setSlotOwner(testOwner);
+		final Board clonedBoard = testBoard.clone();
+		
+		testBoard.resolveBoardConflicts();
+		// the only conflict should result in one card being destroyed
+		final BoardSlot testLeftSlot = testBoard.getBoardSlot(testRow, leftCol);
+		final BoardSlot testRightSlot = testBoard.getBoardSlot(testRow, testCol);
+		final BoardSlot cloneLeftSlot = clonedBoard.getBoardSlot(testRow, leftCol);
+		final BoardSlot cloneRightSlot = clonedBoard.getBoardSlot(testRow, testCol);
+		assertThat(testLeftSlot.equals(cloneLeftSlot), equalTo(false));
+		assertThat(testRightSlot.equals(cloneRightSlot), equalTo(true));
+		assertThat(testLeftSlot.getOwner(), equalTo(null));
+		assertThat(testLeftSlot.getCard(), equalTo(null));
+		assertThat(testRightSlot.getOwner(), equalTo(testOwner));
+		assertThat(testRightSlot.getCard().equals(testCard), equalTo(true));
+	}
+	
 	/**
 	 * Create a sample board for testing. The sample board will have a card in one slot.
 	 * @return
 	 */
 	private Board createTestBoard() {
 		final int testWidth = 2;
-		final int testHeight = 4;
+		final int testHeight = 3;
 		final int testRow = 1;
 		final int testCol = 0;
 		final PlayerIdentity testOwner = PlayerIdentity.LEFT_PLAYER;
