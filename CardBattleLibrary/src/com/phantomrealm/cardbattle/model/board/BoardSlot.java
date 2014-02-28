@@ -52,6 +52,16 @@ public class BoardSlot {
 	}
 	
 	/**
+	 * Creates a copy of an existing BoardSlot
+	 */
+	public BoardSlot clone() {
+		final BoardSlot boardSlot = new BoardSlot();
+		boardSlot.setCard(getCard() != null ? getCard().clone() : null);
+		boardSlot.setSlotOwner(getOwner());
+		return boardSlot;
+	}
+	
+	/**
 	 * Indicates whether or not two BoardSlots are equivalent to each other
 	 * @param slot
 	 * @return

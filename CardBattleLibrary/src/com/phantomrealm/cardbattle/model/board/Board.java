@@ -65,7 +65,7 @@ public class Board {
 				clonedSlot.setSlotOwner(boardSlot.getOwner());
 				Card card = boardSlot.getCard();
 				if (card != null) {
-				 clonedSlot.setCard(card.clone());
+					clonedSlot.setCard(card.clone());
 				}
 			}
 		}
