@@ -146,10 +146,28 @@ public class Card {
 	}
 	
 	/**
+	 * Indicates whether or not two cards are equivalent to each other
+	 * @param card
+	 * @return
+	 */
+	public boolean equals(Card card) {
+		if (card == null
+				|| !card.getName().equalsIgnoreCase(getName())
+				|| card.getAttackType() != getAttackType()
+				|| card.getBonusEffect() != getBonusEffect()
+				|| card.getAttack() != getAttack()
+				|| card.getDefense() != getDefense()
+				|| card.getResistance() != getResistance()) {
+			return false;
+		}
+		return true;
+	}
+	
+	/**
 	 * Gets the string representation of a card class
 	 */
 	public String toString() {
-		return getName() + " " + getAttackType() + ": " + getAttack() + " r: " + getResistance() + " d: " + getDefense();
+		return getName() + " type: " + getAttackType() + ", atk: " + getAttack() + ", def: " + getDefense() + ", res: " + getResistance();
 	}
 	
 }

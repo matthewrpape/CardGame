@@ -52,6 +52,37 @@ public class BoardSlot {
 	}
 	
 	/**
+	 * Creates a copy of an existing BoardSlot
+	 */
+	public BoardSlot clone() {
+		final BoardSlot boardSlot = new BoardSlot();
+		boardSlot.setCard(getCard() != null ? getCard().clone() : null);
+		boardSlot.setSlotOwner(getOwner());
+		return boardSlot;
+	}
+	
+	/**
+	 * Indicates whether or not two BoardSlots are equivalent to each other
+	 * @param slot
+	 * @return
+	 */
+	public boolean equals(BoardSlot slot) {
+		if (slot == null || slot.getOwner() != getOwner()) {
+			return false;
+		}
+		
+		if (getCard() != null) {
+			if(!getCard().equals(slot.getCard())) {
+				return false;
+			}
+		} else if (slot.getCard() != null) {
+			return false;
+		}
+
+		return true;
+	}
+	
+	/**
 	 * Gets the string representation of a board slot
 	 */
 	public String toString() {

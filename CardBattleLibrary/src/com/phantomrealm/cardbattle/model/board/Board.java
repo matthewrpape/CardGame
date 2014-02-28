@@ -16,8 +16,8 @@ import com.phantomrealm.cardbattle.model.card.Card;
  */
 public class Board {
 
-	private static final int DEFAULT_BOARD_WIDTH = 5;
-	private static final int DEFAULT_BOARD_HEIGHT = 5;
+	private static final int DEFAULT_BOARD_WIDTH = 3;
+	private static final int DEFAULT_BOARD_HEIGHT = 3;
 	private static final int MIN_BOARD_WIDTH = 2;
 	private static final int MIN_BOARD_HEIGHT = 1;
 	
@@ -25,7 +25,7 @@ public class Board {
 	private BoardSlot[][] mBoardSlots;
 	
 	/**
-	 * Creates a board of default size (5x5)
+	 * Creates a board of default size (3x3)
 	 */
 	public Board() {
 		this(DEFAULT_BOARD_WIDTH, DEFAULT_BOARD_HEIGHT);
@@ -42,7 +42,7 @@ public class Board {
 	public Board(int boardWidth, int boardHeight) {
 		mListener = new EmptyGameControllerListener();
 		boardWidth = Math.max(boardWidth, MIN_BOARD_WIDTH);
-		boardHeight = Math.max(boardWidth, MIN_BOARD_HEIGHT);
+		boardHeight = Math.max(boardHeight, MIN_BOARD_HEIGHT);
 		mBoardSlots = new BoardSlot[boardHeight][boardWidth];
 		for (int row = 0; row < boardHeight; ++row) {
 			for (int col = 0; col < boardWidth; ++col) {
@@ -65,7 +65,7 @@ public class Board {
 				clonedSlot.setSlotOwner(boardSlot.getOwner());
 				Card card = boardSlot.getCard();
 				if (card != null) {
-				 clonedSlot.setCard(card.clone());
+					clonedSlot.setCard(card.clone());
 				}
 			}
 		}
@@ -153,9 +153,10 @@ public class Board {
 	 * @param move
 	 */
 	public void executeMove(Card card, PlayerIdentity cardOwner, Position move) {
-		if (move == null) { 
-			System.out.println("NULL MOVE");
+		if (move == null) {
+			return;
 		}
+		
 		mListener.onCardMoved(cardOwner, move);
 		BoardSlot position = getBoardSlot(move.getRow(), move.getColumn());
 		position.setCard(card);
@@ -241,7 +242,7 @@ public class Board {
 	/**
 	 * Clears out all stalemated cards if the board is full
 	 */
-	public void resolveBoardStalemate() {
+	public void resolveBoardStalemates() {
 		if (isFull()) {
 			for (int row = 0; row < getHeight(); ++row) {
 				unstalemateRow(getBoardRow(row));

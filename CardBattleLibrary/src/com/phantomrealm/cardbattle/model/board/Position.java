@@ -37,4 +37,20 @@ public class Position {
 		return mColumn;
 	}
 	
+	/**
+	 * Indicates whether or not two Positions are equivalent to each other
+	 * @param position
+	 * @return
+	 */
+	public boolean equals(Position position) {
+		return getRow() == position.getRow() && getColumn() == position.getColumn();
+	}
+	
+	/**
+	 * Gets a string representation of the Position
+	 */
+	public String toString() {
+		return "row: " + getRow() + ", column: " + getColumn();
+	}
+	
 }
