@@ -4,6 +4,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.nullValue;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import com.phantomrealm.cardbattle.controller.player.PlayerIdentity;
@@ -291,6 +293,118 @@ public class BoardTest {
 		assertThat(testLeftSlot.getCard(), equalTo(null));
 		assertThat(testRightSlot.getOwner(), equalTo(null));
 		assertThat(testRightSlot.getCard(), equalTo(null));
+	}
+	
+	@Test
+	public void testGetWinner_NoRowsOwned() {
+		final Board testBoard = new Board();
+		assertThat(testBoard.getWinner(), nullValue());
+	}
+	
+	@Test
+	public void testGetWinner_MinorityOfRowsOwned() {
+		final Board testBoard = new Board();
+		final int testRow = 1;
+		final Card testCard = createTestCard();
+		final PlayerIdentity testOwner = PlayerIdentity.LEFT_PLAYER;
+		for (BoardSlot slot : testBoard.getBoardRow(testRow)) {
+			slot.setCard(testCard);
+			slot.setSlotOwner(testOwner);
+		}
+		assertThat(testBoard.getWinner(), nullValue());
+	}
+	
+	@Test
+	public void testGetWinner_EvenNumberOfRowsOwned() {
+		final Board testBoard = new Board(2, 4);
+		final Card testCard = createTestCard();
+		for (int row = 0; row < testBoard.getHeight(); ++row) {
+			for (int col = 0; col < testBoard.getWidth(); ++col) {
+				final BoardSlot slot = testBoard.getBoardSlot(row, col);
+				final PlayerIdentity owner = (col % 2 == 0) ? PlayerIdentity.LEFT_PLAYER : PlayerIdentity.RIGHT_PLAYER;
+				slot.setCard(testCard);
+				slot.setSlotOwner(owner);
+			}
+		}
+		assertThat(testBoard.getWinner(), nullValue());
+	}
+	
+	@Test
+	public void testGetWinner_MajorityOfRowsOwned() {
+		final Board testBoard = new Board();
+		final int testRowStart = 0;
+		final int testRowEnd = 1;
+		final Card testCard = createTestCard();
+		final PlayerIdentity testOwner = PlayerIdentity.LEFT_PLAYER;
+		for (int row = testRowStart; row <= testRowEnd; ++row) {
+			for (int col = 0; col < testBoard.getWidth(); ++col) {
+				final BoardSlot slot = testBoard.getBoardSlot(row, col);
+				slot.setCard(testCard);
+				slot.setSlotOwner(testOwner);
+			}
+		}
+		assertThat(testBoard.getWinner(), equalTo(PlayerIdentity.LEFT_PLAYER));
+	}
+	
+	@Test
+	public void testGetPossibleMoves_LeftPlayerEmptyBoard() {
+		final Board testBoard = new Board();
+		final PlayerIdentity testPlayer = PlayerIdentity.LEFT_PLAYER;
+		List<Position> moves = testBoard.getPossibleMoves(testPlayer);
+		assertThat(moves.size(), equalTo(3));
+		assertThat(moves.get(0).equals(new Position(0, 0)), equalTo(true));
+		assertThat(moves.get(1).equals(new Position(1, 0)), equalTo(true));
+		assertThat(moves.get(2).equals(new Position(2, 0)), equalTo(true));
+	}
+	
+	@Test
+	public void testGetPossibleMoves_RightPlayerEmptyBoard() {
+		final Board testBoard = new Board();
+		final PlayerIdentity testPlayer = PlayerIdentity.RIGHT_PLAYER;
+		List<Position> moves = testBoard.getPossibleMoves(testPlayer);
+		assertThat(moves.size(), equalTo(3));
+		assertThat(moves.get(0).equals(new Position(0, 2)), equalTo(true));
+		assertThat(moves.get(1).equals(new Position(1, 2)), equalTo(true));
+		assertThat(moves.get(2).equals(new Position(2, 2)), equalTo(true));
+	}
+	
+	@Test
+	public void testGetPossibleMoves_PartiallyFilledBoard() {
+		final Board testBoard = createTestBoard();
+		final PlayerIdentity testPlayer = PlayerIdentity.LEFT_PLAYER;
+		final Card testCard = createTestCard();
+		for (BoardSlot testSlot : testBoard.getBoardRow(0)) {
+			testSlot.setCard(testCard);
+			testSlot.setSlotOwner(PlayerIdentity.not(testPlayer));
+		}
+		List<Position> moves = testBoard.getPossibleMoves(testPlayer);
+		assertThat(moves.size(), equalTo(2));
+		assertThat(moves.get(0).equals(new Position(1, 1)), equalTo(true));
+		assertThat(moves.get(1).equals(new Position(2, 0)), equalTo(true));
+	}
+	
+	@Test
+	public void testIsValidMove_ValidLeftPlayerMove() {
+		final Board testBoard = new Board();
+		final Position testMove = new Position(0, 0);
+		assertThat(testBoard.isValidMove(PlayerIdentity.LEFT_PLAYER, testMove), equalTo(true));
+		assertThat(testBoard.isValidMove(PlayerIdentity.RIGHT_PLAYER, testMove), equalTo(false));
+	}
+	
+	@Test
+	public void testIsValidMove_ValidMoveForOtherPlayer() {
+		final Board testBoard = new Board();
+		final Position testMove = new Position(0, 2);
+		assertThat(testBoard.isValidMove(PlayerIdentity.LEFT_PLAYER, testMove), equalTo(false));
+		assertThat(testBoard.isValidMove(PlayerIdentity.RIGHT_PLAYER, testMove), equalTo(true));
+	}
+	
+	@Test
+	public void testIsValidMove_InvalidMove() {
+		final Board testBoard = new Board();
+		final Position testMove = new Position(1, 1);
+		assertThat(testBoard.isValidMove(PlayerIdentity.LEFT_PLAYER, testMove), equalTo(false));
+		assertThat(testBoard.isValidMove(PlayerIdentity.RIGHT_PLAYER, testMove), equalTo(false));
 	}
 	
 	/**
