@@ -64,11 +64,10 @@ public class DeckTest {
 	public void testClone_Equal() {
 		final Deck testDeck = DeckFactory.generateTestDeck();
 		final Deck clonedDeck = testDeck.clone();
-		for (Card card : testDeck) {
-			System.out.println("card: " + card.toString());
-			System.out.println("clone: " + card.toString());
+		while (testDeck.size() > 0) {
+			Card testCard = testDeck.pop();
 			Card clonedCard = clonedDeck.pop();
-			assertThat(card.equalTo(clonedCard), equalTo(true));
+			assertThat(testCard.equalTo(clonedCard), equalTo(true));
 		}
 	}
 	
