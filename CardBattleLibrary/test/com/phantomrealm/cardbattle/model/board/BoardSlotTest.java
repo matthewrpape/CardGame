@@ -36,7 +36,7 @@ public class BoardSlotTest {
 		testSlot.setCard(createTestCard());
 		testSlot.setSlotOwner(PlayerIdentity.LEFT_PLAYER);
 		clonedSlot = testSlot.clone();
-		assertThat(clonedSlot.getCard().equals(testSlot.getCard()), equalTo(true));
+		assertThat(clonedSlot.getCard().equalTo(testSlot.getCard()), equalTo(true));
 		assertThat(clonedSlot.getOwner().equals(testSlot.getOwner()), equalTo(true));
 	}
 	
@@ -46,34 +46,34 @@ public class BoardSlotTest {
 		testSlot.setCard(createTestCard());
 		testSlot.setSlotOwner(PlayerIdentity.LEFT_PLAYER);
 		final BoardSlot clonedSlot = testSlot.clone();
-		assertThat(clonedSlot.getCard().equals(testSlot.getCard()), equalTo(true));
+		assertThat(clonedSlot.getCard().equalTo(testSlot.getCard()), equalTo(true));
 		assertThat(clonedSlot.getCard(), not(testSlot.getCard()));
 	}
 	
 	@Test
-	public void testEquals_Equal() {
+	public void testEqualTo_Equal() {
 		final BoardSlot testSlot = new BoardSlot();
 		final BoardSlot secondSlot = new BoardSlot();
-		assertThat(testSlot.equals(secondSlot), equalTo(true));
+		assertThat(testSlot.equalTo(secondSlot), equalTo(true));
 		
 		testSlot.setCard(createTestCard());
 		testSlot.setSlotOwner(PlayerIdentity.LEFT_PLAYER);
 		secondSlot.setCard(createTestCard());
 		secondSlot.setSlotOwner(PlayerIdentity.LEFT_PLAYER);
-		assertThat(testSlot.equals(secondSlot), equalTo(true));
+		assertThat(testSlot.equalTo(secondSlot), equalTo(true));
 	}
 	
 	@Test
-	public void testEquals_NotEqual() {
+	public void testEqualTo_NotEqual() {
 		final BoardSlot testSlot = new BoardSlot();
 		final BoardSlot secondSlot = new BoardSlot();
 		testSlot.setCard(createTestCard());
 		testSlot.setSlotOwner(PlayerIdentity.LEFT_PLAYER);
-		assertThat(testSlot.equals(secondSlot), equalTo(false));
+		assertThat(testSlot.equalTo(secondSlot), equalTo(false));
 		
 		secondSlot.setCard(createTestCard());
 		secondSlot.setSlotOwner(PlayerIdentity.RIGHT_PLAYER);
-		assertThat(testSlot.equals(secondSlot), equalTo(false));
+		assertThat(testSlot.equalTo(secondSlot), equalTo(false));
 	}
 	
 	/**

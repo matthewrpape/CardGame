@@ -150,7 +150,7 @@ public class Card {
 	 * @param card
 	 * @return
 	 */
-	public boolean equals(Card card) {
+	public boolean equalTo(Card card) {
 		if (card == null
 				|| !card.getName().equalsIgnoreCase(getName())
 				|| card.getAttackType() != getAttackType()

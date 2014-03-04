@@ -58,64 +58,64 @@ public class CardTest {
 	}
 	
 	@Test
-	public void testEquals_Name() {
+	public void testEqualTo_Name() {
 		final String newName = "Bogus Weirdo";
 		Card cardOne = createCard();
 		Card cardTwo = createCard();
-		assertThat(cardOne.equals(cardTwo), equalTo(true));
+		assertThat(cardOne.equalTo(cardTwo), equalTo(true));
 		
 		cardOne.setName(newName);
-		assertThat(cardOne.equals(cardTwo), equalTo(false));
+		assertThat(cardOne.equalTo(cardTwo), equalTo(false));
 	}
 	
 	@Test
-	public void testEquals_AttackType() {
+	public void testEqualTo_AttackType() {
 		final AttackType newType = AttackType.MAGICAL;
 		Card cardOne = createCard();
 		Card cardTwo = createCard();
-		assertThat(cardOne.equals(cardTwo), equalTo(true));
+		assertThat(cardOne.equalTo(cardTwo), equalTo(true));
 		
 		cardOne.setAttackType(newType);
-		assertThat(cardOne.equals(cardTwo), equalTo(false));
+		assertThat(cardOne.equalTo(cardTwo), equalTo(false));
 	}
 	
 	@Test
-	public void testEquals_Attack() {
+	public void testEqualTo_Attack() {
 		final int newAttack = 5;
 		Card cardOne = createCard();
 		Card cardTwo = createCard();
-		assertThat(cardOne.equals(cardTwo), equalTo(true));
+		assertThat(cardOne.equalTo(cardTwo), equalTo(true));
 		
 		cardOne.setAttack(newAttack);
-		assertThat(cardOne.equals(cardTwo), equalTo(false));
+		assertThat(cardOne.equalTo(cardTwo), equalTo(false));
 	}
 	
 	@Test
-	public void testEquals_Defense() {
+	public void testEqualTo_Defense() {
 		final int newDefense = 4;
 		Card cardOne = createCard();
 		Card cardTwo = createCard();
-		assertThat(cardOne.equals(cardTwo), equalTo(true));
+		assertThat(cardOne.equalTo(cardTwo), equalTo(true));
 		
 		cardOne.setDefense(newDefense);
-		assertThat(cardOne.equals(cardTwo), equalTo(false));
+		assertThat(cardOne.equalTo(cardTwo), equalTo(false));
 	}
 	
 	@Test
-	public void testEquals_Resistance() {
+	public void testEqualTo_Resistance() {
 		final int newResistance = 0;
 		Card cardOne = createCard();
 		Card cardTwo = createCard();
-		assertThat(cardOne.equals(cardTwo), equalTo(true));
+		assertThat(cardOne.equalTo(cardTwo), equalTo(true));
 		
 		cardOne.setResistance(newResistance);
-		assertThat(cardOne.equals(cardTwo), equalTo(false));
+		assertThat(cardOne.equalTo(cardTwo), equalTo(false));
 	}
 	
 	@Test
-	public void testEquals_NullCard() {
+	public void testEqualTo_NullCard() {
 		Card card = createCard();
-		assertThat(card.equals(null), equalTo(false));
+		assertThat(card.equalTo(null), equalTo(false));
 	}
 
 	private Card createCard() {

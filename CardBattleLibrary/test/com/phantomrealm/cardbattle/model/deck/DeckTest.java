@@ -16,13 +16,6 @@ import static org.hamcrest.core.IsNot.not;
 
 public class DeckTest {
 
-//	private static final String TEST_NAME = "Wimpy Newb";
-//	private static final BonusEffect TEST_EFFECT = null;
-//	private static final AttackType TEST_TYPE = AttackType.PHYSICAL;
-//	private static final int TEST_ATTACK = 1;
-//	private static final int TEST_RESISTANCE = 2;
-//	private static final int TEST_DEFENSE = 3;
-
 	@Test
 	public void testConstructor() {
 		final Deck testDeck = new Deck();
@@ -56,14 +49,14 @@ public class DeckTest {
 		
 		// deck has 99 cards and room for only 1 more
 		Card testCard = testDeck.push(createPhysicalCard());
-		assertThat(testCard.equals(createPhysicalCard()), equalTo(true));
-		assertThat(testDeck.peek().equals(createPhysicalCard()), equalTo(true));
+		assertThat(testCard.equalTo(createPhysicalCard()), equalTo(true));
+		assertThat(testDeck.peek().equalTo(createPhysicalCard()), equalTo(true));
 		assertThat(testDeck.size(), equalTo(100));
 		
 		// deck has 100 cards and further pushes should fail
 		testCard = testDeck.push(createMagicalCard());
 		assertThat(testCard, nullValue());
-		assertThat(testDeck.peek().equals(createMagicalCard()), equalTo(false));
+		assertThat(testDeck.peek().equalTo(createMagicalCard()), equalTo(false));
 		assertThat(testDeck.size(), equalTo(100));
 	}
 	
@@ -72,8 +65,10 @@ public class DeckTest {
 		final Deck testDeck = DeckFactory.generateTestDeck();
 		final Deck clonedDeck = testDeck.clone();
 		for (Card card : testDeck) {
+			System.out.println("card: " + card.toString());
+			System.out.println("clone: " + card.toString());
 			Card clonedCard = clonedDeck.pop();
-			assertThat(card.equals(clonedCard), equalTo(true));
+			assertThat(card.equalTo(clonedCard), equalTo(true));
 		}
 	}
 	
