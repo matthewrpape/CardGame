@@ -54,7 +54,7 @@ public class BoardTest {
 		
 		for (int row = 0; row < clone.getHeight(); ++row) {
 			for (int col = 0; col < clone.getWidth(); ++col) {
-				assertThat(clone.getBoardSlot(row, col).equals(board.getBoardSlot(row, col)), equalTo(true));
+				assertThat(clone.getBoardSlot(row, col).equalTo(board.getBoardSlot(row, col)), equalTo(true));
 			}
 		}
 	}
@@ -109,7 +109,7 @@ public class BoardTest {
 			for (int col = 0; col < testBoard.getWidth(); ++col) {
 				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
 				final BoardSlot cloneSlot = clonedBoard.getBoardSlot(row, col);
-				assertThat(testSlot.equals(cloneSlot), equalTo(true));
+				assertThat(testSlot.equalTo(cloneSlot), equalTo(true));
 			}
 		}
 	}
@@ -140,7 +140,7 @@ public class BoardTest {
 			for (int col = 0; col < testBoard.getWidth(); ++col) {
 				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
 				final BoardSlot cloneSlot = clonedBoard.getBoardSlot(row, col);
-				assertThat(testSlot.equals(cloneSlot), equalTo(true));
+				assertThat(testSlot.equalTo(cloneSlot), equalTo(true));
 			}
 		}
 	}
@@ -163,7 +163,7 @@ public class BoardTest {
 			for (int col = 0; col < testBoard.getWidth(); ++col) {
 				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
 				final BoardSlot cloneSlot = clonedBoard.getBoardSlot(row, col);
-				assertThat(testSlot.equals(cloneSlot), equalTo(true));
+				assertThat(testSlot.equalTo(cloneSlot), equalTo(true));
 			}
 		}
 	}
@@ -186,8 +186,8 @@ public class BoardTest {
 		final BoardSlot testRightSlot = testBoard.getBoardSlot(testRow, testCol);
 		final BoardSlot cloneLeftSlot = clonedBoard.getBoardSlot(testRow, leftCol);
 		final BoardSlot cloneRightSlot = clonedBoard.getBoardSlot(testRow, testCol);
-		assertThat(testLeftSlot.equals(cloneLeftSlot), equalTo(false));
-		assertThat(testRightSlot.equals(cloneRightSlot), equalTo(false));
+		assertThat(testLeftSlot.equalTo(cloneLeftSlot), equalTo(false));
+		assertThat(testRightSlot.equalTo(cloneRightSlot), equalTo(false));
 		assertThat(testLeftSlot.getOwner(), equalTo(null));
 		assertThat(testLeftSlot.getCard(), equalTo(null));
 		assertThat(testRightSlot.getOwner(), equalTo(null));
@@ -213,12 +213,12 @@ public class BoardTest {
 		final BoardSlot testRightSlot = testBoard.getBoardSlot(testRow, testCol);
 		final BoardSlot cloneLeftSlot = clonedBoard.getBoardSlot(testRow, leftCol);
 		final BoardSlot cloneRightSlot = clonedBoard.getBoardSlot(testRow, testCol);
-		assertThat(testLeftSlot.equals(cloneLeftSlot), equalTo(false));
-		assertThat(testRightSlot.equals(cloneRightSlot), equalTo(true));
+		assertThat(testLeftSlot.equalTo(cloneLeftSlot), equalTo(false));
+		assertThat(testRightSlot.equalTo(cloneRightSlot), equalTo(true));
 		assertThat(testLeftSlot.getOwner(), equalTo(null));
 		assertThat(testLeftSlot.getCard(), equalTo(null));
 		assertThat(testRightSlot.getOwner(), equalTo(testOwner));
-		assertThat(testRightSlot.getCard().equals(testCard), equalTo(true));
+		assertThat(testRightSlot.getCard().equalTo(testCard), equalTo(true));
 	}
 	
 	@Test
@@ -231,7 +231,7 @@ public class BoardTest {
 			for (int col = 0; col < testBoard.getWidth(); ++col) {
 				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
 				final BoardSlot cloneSlot = clonedBoard.getBoardSlot(row, col);
-				assertThat(testSlot.equals(cloneSlot), equalTo(true));
+				assertThat(testSlot.equalTo(cloneSlot), equalTo(true));
 			}
 		}
 	}
@@ -254,7 +254,7 @@ public class BoardTest {
 			for (int col = 0; col < testBoard.getWidth(); ++col) {
 				final BoardSlot testSlot = testBoard.getBoardSlot(row, col);
 				final BoardSlot cloneSlot = clonedBoard.getBoardSlot(row, col);
-				assertThat(testSlot.equals(cloneSlot), equalTo(true));
+				assertThat(testSlot.equalTo(cloneSlot), equalTo(true));
 			}
 		}
 	}
@@ -287,8 +287,8 @@ public class BoardTest {
 		final BoardSlot testRightSlot = testBoard.getBoardSlot(testRow, rightCol);
 		final BoardSlot cloneLeftSlot = clonedBoard.getBoardSlot(testRow, leftCol);
 		final BoardSlot cloneRightSlot = clonedBoard.getBoardSlot(testRow, rightCol);
-		assertThat(testLeftSlot.equals(cloneLeftSlot), equalTo(false));
-		assertThat(testRightSlot.equals(cloneRightSlot), equalTo(false));
+		assertThat(testLeftSlot.equalTo(cloneLeftSlot), equalTo(false));
+		assertThat(testRightSlot.equalTo(cloneRightSlot), equalTo(false));
 		assertThat(testLeftSlot.getOwner(), equalTo(null));
 		assertThat(testLeftSlot.getCard(), equalTo(null));
 		assertThat(testRightSlot.getOwner(), equalTo(null));

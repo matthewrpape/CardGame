@@ -66,13 +66,13 @@ public class BoardSlot {
 	 * @param slot
 	 * @return
 	 */
-	public boolean equals(BoardSlot slot) {
+	public boolean equalTo(BoardSlot slot) {
 		if (slot == null || slot.getOwner() != getOwner()) {
 			return false;
 		}
 		
 		if (getCard() != null) {
-			if(!getCard().equals(slot.getCard())) {
+			if(!getCard().equalTo(slot.getCard())) {
 				return false;
 			}
 		} else if (slot.getCard() != null) {
