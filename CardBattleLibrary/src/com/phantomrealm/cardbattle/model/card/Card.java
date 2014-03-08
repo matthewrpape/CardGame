@@ -1,13 +1,17 @@
 package com.phantomrealm.cardbattle.model.card;
 
+import java.io.Serializable;
+
 
 /**
  * Model object representing a single card to be played
  * 
  * @author matthewpape
  */
-public class Card {
+public class Card implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private String mName;
 	private BonusEffect mBonusEffect;
 	private AttackType mAttackType;

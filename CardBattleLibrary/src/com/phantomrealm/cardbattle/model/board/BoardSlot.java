@@ -1,5 +1,7 @@
 package com.phantomrealm.cardbattle.model.board;
 
+import java.io.Serializable;
+
 import com.phantomrealm.cardbattle.controller.player.PlayerIdentity;
 import com.phantomrealm.cardbattle.model.card.Card;
 
@@ -8,7 +10,9 @@ import com.phantomrealm.cardbattle.model.card.Card;
  * 
  * @author matthewpape
  */
-public class BoardSlot {
+public class BoardSlot implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private PlayerIdentity mOwner;
 	private Card mCard;
